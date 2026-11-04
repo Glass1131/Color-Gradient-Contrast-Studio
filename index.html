@@ -37,6 +37,32 @@
       background-color: rgba(139, 92, 246, 0.12);
       box-shadow: 0 0 0 1px #8b5cf6, 0 8px 20px -4px rgba(139, 92, 246, 0.25);
     }
+    /* Modern UI Animation & FX Styles */
+    @keyframes shimmerSweep {
+      0% { transform: translateX(-150%); }
+      100% { transform: translateX(150%); }
+    }
+    .animate-shimmer-sweep {
+      animation: shimmerSweep 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    @keyframes auroraFloat {
+      0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+      50% { transform: translate(30px, -25px) rotate(15deg) scale(1.15); }
+      100% { transform: translate(-20px, 15px) rotate(-10deg) scale(0.95); }
+    }
+    .animate-aurora-blob1 {
+      animation: auroraFloat 10s infinite ease-in-out alternate;
+    }
+    .animate-aurora-blob2 {
+      animation: auroraFloat 12s infinite ease-in-out alternate-reverse;
+    }
+    @keyframes neonPulseGlow {
+      0%, 100% { filter: drop-shadow(0 0 14px var(--neon-glow, rgba(139, 92, 246, 0.4))); }
+      50% { filter: drop-shadow(0 0 28px var(--neon-glow, rgba(139, 92, 246, 0.75))); }
+    }
+    .animate-neon-pulse {
+      animation: neonPulseGlow 3.5s infinite ease-in-out;
+    }
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen font-sans selection:bg-purple-500 selection:text-white pb-16 antialiased">
@@ -373,25 +399,38 @@
       <!-- RIGHT COLUMN: Real-Time Live UI Component Simulation (7 Cols) -->
       <div class="lg:col-span-7 space-y-4">
 
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <h2 class="text-lg font-bold text-white tracking-tight flex items-center gap-2">
-              실시간 UI 컴포넌트 시뮬레이션
+              실시간 UI 시뮬레이터
               <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             </h2>
-            <p class="text-xs text-slate-400">아래 프리뷰 컨테이너 전체가 선택한 배경색(그라데이션)으로 실시간 변경됩니다.</p>
+            <p class="text-xs text-slate-400">선택한 배색이 실제 화면과 인터랙션 효과에 어떻게 렌더링되는지 확인합니다.</p>
           </div>
+
+          <!-- View Mode Tab Switcher & Compensation Toggle -->
           <div class="flex flex-wrap items-center gap-2">
+            <!-- Modern Tab Switcher Pill -->
+            <div class="inline-flex p-1 bg-slate-900 border border-slate-700/80 rounded-xl shadow-inner">
+              <button type="button" id="tabBtnUI" class="px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-violet-600 text-white shadow-sm">
+                <span>📱 기본 컴포넌트</span>
+              </button>
+              <button type="button" id="tabBtnFX" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 text-slate-400 hover:text-slate-200">
+                <span>✨ 모던 FX & 모션</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-violet-400"></span>
+              </button>
+            </div>
+
             <!-- Dark Mode Optical Font Weight Compensation Toggle -->
-            <label class="flex items-center gap-2 bg-slate-900 border border-slate-700/80 px-2.5 py-1 rounded-lg cursor-pointer hover:border-violet-500/50 transition select-none" title="어두운 배경에서 글자가 빛 번짐(Halation)으로 굵어 보이는 현상을 상쇄하기 위해 폰트 굵기를 반 단계 자동 완화합니다">
+            <label class="flex items-center gap-2 bg-slate-900 border border-slate-700/80 px-2.5 py-1.5 rounded-xl cursor-pointer hover:border-violet-500/50 transition select-none" title="어두운 배경에서 글자가 빛 번짐(Halation)으로 굵어 보이는 현상을 상쇄하기 위해 폰트 굵기를 반 단계 자동 완화합니다">
               <input type="checkbox" id="toggleWeightComp" class="w-3.5 h-3.5 rounded text-violet-600 focus:ring-0 bg-slate-800 border-slate-600 cursor-pointer" checked>
               <span class="text-[11px] font-medium text-slate-300 flex items-center gap-1.5">
                 <span>폰트 굵기 보정</span>
-                <span id="badgeWeightCompActive" class="text-[9px] px-1 py-0.2 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded font-mono hidden">보정 적용됨</span>
+                <span id="badgeWeightCompActive" class="text-[9px] px-1 py-0.2 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded font-mono hidden">적용됨</span>
               </span>
             </label>
 
-            <span id="liveBgBadge" class="text-[11px] font-mono bg-slate-900 border border-slate-700 text-violet-300 px-2.5 py-1 rounded-lg">
+            <span id="liveBgBadge" class="text-[11px] font-mono bg-slate-900 border border-slate-700 text-violet-300 px-2.5 py-1.5 rounded-xl">
               BG: #1E1B4B → #4338CA
             </span>
           </div>
@@ -400,100 +439,202 @@
         <!-- UNIFIED BACKGROUND CONTAINER -->
         <div id="previewCanvasWrapper" class="preview-dynamic p-6 sm:p-8 rounded-3xl border-2 transition-all duration-150 space-y-6 shadow-2xl relative overflow-hidden">
 
-          <!-- 1. Hero Feature / Card UI -->
-          <div id="previewHeroCard" class="preview-dynamic rounded-2xl p-6 sm:p-8 border transition-all duration-150 relative overflow-hidden">
-            <div class="max-w-xl">
-              <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-5 border" id="previewBadge">
-                <span class="w-2 h-2 rounded-full bg-current opacity-90 animate-pulse"></span>
-                <span>2026 차세대 디자인 시스템</span>
-              </div>
-              <h3 id="previewHeroTitle" class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-3 leading-tight">
-                완벽한 가독성과 심미성을 갖춘 UI 배색
-              </h3>
-              <p id="previewHeroDesc" class="text-base sm:text-lg opacity-90 mb-7 leading-relaxed font-normal">
-                배경과 글자 사이의 명암비를 실시간으로 점검하고, 사용자가 어떤 환경에서도 편안하게 읽을 수 있는 인터페이스를 완성하세요.
-              </p>
-              <div class="flex flex-wrap items-center gap-3.5">
-                <button id="previewBtnPrimary" class="px-6 py-3.5 rounded-xl text-sm font-bold shadow-xl transition active:scale-95 flex items-center gap-2.5">
-                  <span>프로젝트 시작하기</span>
-                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </button>
-                <button id="previewBtnSecondary" class="px-5 py-3.5 rounded-xl text-sm font-semibold transition active:scale-95 border">
-                  문서 확인
-                </button>
-              </div>
-            </div>
-          </div>
+          <!-- TAB 1 CONTENT: STANDARD UI COMPONENTS -->
+          <div id="tabContentUI" class="space-y-6">
 
-          <!-- 2. Typography Scale Check (Headings & Body) -->
-          <div id="previewTypoOuter" class="preview-dynamic rounded-2xl p-6 sm:p-8 border transition-all duration-150">
-            <div id="previewTypoHeader" class="flex items-center justify-between border-b pb-3.5 mb-5">
-              <h3 class="text-xs font-bold uppercase tracking-wider opacity-85">타이포그래피 가독성 테스트 (Typography Scale)</h3>
-              <span class="text-xs opacity-75 font-mono">크기별 가독성 체감</span>
-            </div>
-
-            <div id="previewTypoContainer" class="space-y-5">
-              <div>
-                <div class="flex items-center justify-between mb-1.5">
-                  <span class="text-xs opacity-75 font-mono font-medium">Heading 1 (30px Bold) — 대형 텍스트 (3.0:1 이상)</span>
+            <!-- 1. Hero Feature / Card UI -->
+            <div id="previewHeroCard" class="preview-dynamic rounded-2xl p-6 sm:p-8 border transition-all duration-150 relative overflow-hidden">
+              <div class="max-w-xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-5 border" id="previewBadge">
+                  <span class="w-2 h-2 rounded-full bg-current opacity-90 animate-pulse"></span>
+                  <span>2026 차세대 디자인 시스템</span>
                 </div>
-                <h1 id="previewTypoH1" class="text-2xl sm:text-4xl font-bold tracking-tight">
-                  디지털 프로덕트 디자인 가이드라인
-                </h1>
-              </div>
-
-              <div class="pt-4 border-t border-current/20">
-                <div class="flex items-center justify-between mb-1.5">
-                  <span class="text-xs opacity-75 font-mono font-medium">Body Regular (17px) — 일반 텍스트 (4.5:1 이상)</span>
-                </div>
-                <p id="previewTypoBody" class="text-base leading-relaxed">
-                  시각적 계층 구조(Visual Hierarchy)는 사용자가 정보를 신속하게 탐색하도록 돕습니다. 본문 텍스트는 긴 문장에서도 눈의 피로도를 낮추기 위해 충분한 명암비가 필수적입니다.
+                <h3 id="previewHeroTitle" class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-3 leading-tight">
+                  완벽한 가독성과 심미성을 갖춘 UI 배색
+                </h3>
+                <p id="previewHeroDesc" class="text-base sm:text-lg opacity-90 mb-7 leading-relaxed font-normal">
+                  배경과 글자 사이의 명암비를 실시간으로 점검하고, 사용자가 어떤 환경에서도 편안하게 읽을 수 있는 인터페이스를 완성하세요.
                 </p>
-              </div>
-
-              <div class="pt-4 border-t border-current/20">
-                <div class="flex items-center justify-between mb-1.5">
-                  <span class="text-xs opacity-75 font-mono font-medium">Small Caption (14px Muted) — 보조 텍스트</span>
+                <div class="flex flex-wrap items-center gap-3.5">
+                  <button id="previewBtnPrimary" class="px-6 py-3.5 rounded-xl text-sm font-bold shadow-xl transition active:scale-95 flex items-center gap-2.5">
+                    <span>프로젝트 시작하기</span>
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </button>
+                  <button id="previewBtnSecondary" class="px-5 py-3.5 rounded-xl text-sm font-semibold transition active:scale-95 border">
+                    문서 확인
+                  </button>
                 </div>
-                <p id="previewTypoCaption" class="text-sm opacity-80 font-medium">
-                  * 마지막 업데이트: 2026-11-04 · WCAG 2.1 Level AA 규격 검증 완료
-                </p>
               </div>
             </div>
-          </div>
 
-          <!-- 3. Form Input & Action Bar Mockup -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <!-- Card Widget 1: Interactive Form -->
-            <div id="previewFormCard" class="preview-dynamic rounded-2xl p-6 border transition-all duration-150">
-              <h4 id="previewFormTitle" class="text-base font-bold mb-1.5">뉴스레터 구독 신청</h4>
-              <p id="previewFormDesc" class="text-sm opacity-85 mb-5 leading-snug">최신 디자인 토큰 업데이트 소식을 받아보세요.</p>
-              <div class="space-y-3">
-                <input type="text" placeholder="이메일 주소를 입력하세요" id="previewInput" class="w-full px-4 py-3 text-sm rounded-xl border outline-none placeholder:opacity-50 transition shadow-inner" readonly value="designer@company.com">
-                <button id="previewBtnSubmit" class="w-full py-3 px-4 rounded-xl text-sm font-bold shadow-md transition active:scale-95">
-                  구독하기
+            <!-- 2. Typography Scale Check (Headings & Body) -->
+            <div id="previewTypoOuter" class="preview-dynamic rounded-2xl p-6 sm:p-8 border transition-all duration-150">
+              <div id="previewTypoHeader" class="flex items-center justify-between border-b pb-3.5 mb-5">
+                <h3 class="text-xs font-bold uppercase tracking-wider opacity-85">타이포그래피 가독성 테스트 (Typography Scale)</h3>
+                <span class="text-xs opacity-75 font-mono">크기별 가독성 체감</span>
+              </div>
+
+              <div id="previewTypoContainer" class="space-y-5">
+                <div>
+                  <div class="flex items-center justify-between mb-1.5">
+                    <span class="text-xs opacity-75 font-mono font-medium">Heading 1 (30px Bold) — 대형 텍스트 (3.0:1 이상)</span>
+                  </div>
+                  <h1 id="previewTypoH1" class="text-2xl sm:text-4xl font-bold tracking-tight">
+                    디지털 프로덕트 디자인 가이드라인
+                  </h1>
+                </div>
+
+                <div class="pt-4 border-t border-current/20">
+                  <div class="flex items-center justify-between mb-1.5">
+                    <span class="text-xs opacity-75 font-mono font-medium">Body Regular (17px) — 일반 텍스트 (4.5:1 이상)</span>
+                  </div>
+                  <p id="previewTypoBody" class="text-base leading-relaxed">
+                    시각적 계층 구조(Visual Hierarchy)는 사용자가 정보를 신속하게 탐색하도록 돕습니다. 본문 텍스트는 긴 문장에서도 눈의 피로도를 낮추기 위해 충분한 명암비가 필수적입니다.
+                  </p>
+                </div>
+
+                <div class="pt-4 border-t border-current/20">
+                  <div class="flex items-center justify-between mb-1.5">
+                    <span class="text-xs opacity-75 font-mono font-medium">Small Caption (14px Muted) — 보조 텍스트</span>
+                  </div>
+                  <p id="previewTypoCaption" class="text-sm opacity-80 font-medium">
+                    * 마지막 업데이트: 2026-11-04 · WCAG 2.1 Level AA 규격 검증 완료
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Form Input & Action Bar Mockup -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <!-- Card Widget 1: Interactive Form -->
+              <div id="previewFormCard" class="preview-dynamic rounded-2xl p-6 border transition-all duration-150">
+                <h4 id="previewFormTitle" class="text-base font-bold mb-1.5">뉴스레터 구독 신청</h4>
+                <p id="previewFormDesc" class="text-sm opacity-85 mb-5 leading-snug">최신 디자인 토큰 업데이트 소식을 받아보세요.</p>
+                <div class="space-y-3">
+                  <input type="text" placeholder="이메일 주소를 입력하세요" id="previewInput" class="w-full px-4 py-3 text-sm rounded-xl border outline-none placeholder:opacity-50 transition shadow-inner" readonly value="designer@company.com">
+                  <button id="previewBtnSubmit" class="w-full py-3 px-4 rounded-xl text-sm font-bold shadow-md transition active:scale-95">
+                    구독하기
+                  </button>
+                </div>
+              </div>
+
+              <!-- Card Widget 2: Metric / Stat Card -->
+              <div id="previewStatCard" class="preview-dynamic rounded-2xl p-6 border transition-all duration-150 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-3">
+                    <span id="previewStatLabel" class="text-sm font-semibold opacity-85">전환율 통계 (Conversion)</span>
+                    <span class="text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wider" id="previewTrendBadge">+24.8%</span>
+                  </div>
+                  <div id="previewStatNumber" class="text-4xl font-extrabold tracking-tight mt-1">94.2%</div>
+                  <p id="previewStatNote" class="text-sm opacity-85 mt-1.5">접근성 개선 후 이탈률 18% 감소</p>
+                </div>
+                <div class="mt-5 pt-3.5 border-t border-current/20 flex items-center justify-between text-sm">
+                  <span class="opacity-80">사용자 만족도 점수</span>
+                  <span class="font-bold">4.9 / 5.0</span>
+                </div>
+              </div>
+            </div>
+
+          </div> <!-- /#tabContentUI -->
+
+          <!-- TAB 2 CONTENT: MODERN FX & ANIMATION SHOWCASE -->
+          <div id="tabContentFX" class="space-y-6 hidden">
+
+            <!-- FX 1: Fluid Aurora Mesh Animation Card -->
+            <div id="fxAuroraCard" class="preview-dynamic rounded-2xl p-6 sm:p-8 border transition-all duration-150 relative overflow-hidden">
+              <!-- Moving Gradient Blobs Background -->
+              <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-50">
+                <div id="fxAuroraBlob1" class="absolute -top-12 -left-12 w-64 h-64 rounded-full blur-3xl animate-aurora-blob1"></div>
+                <div id="fxAuroraBlob2" class="absolute -bottom-12 -right-12 w-72 h-72 rounded-full blur-3xl animate-aurora-blob2"></div>
+              </div>
+
+              <div class="relative z-10 max-w-xl">
+                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold mb-4 border" id="fxAuroraBadge">
+                  <span class="w-2 h-2 rounded-full bg-current animate-ping"></span>
+                  <span>01. 오로라 메쉬 그라데이션 모션</span>
+                </div>
+                <h3 id="fxAuroraTitle" class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2.5">
+                  살아 움직이는 유기적 배경 위의 시인성
+                </h3>
+                <p id="fxAuroraDesc" class="text-sm sm:text-base opacity-90 leading-relaxed mb-6 font-normal">
+                  배경이 멈춰있지 않고 은은하게 회전하며 흐를 때도 텍스트가 번짐 없이 또렷하게 판독되는지 실시간으로 검증할 수 있습니다.
+                </p>
+                <div class="p-3.5 rounded-xl border flex items-center justify-between text-xs font-medium" id="fxAuroraStatusBox">
+                  <span class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>모션 영역 가독성 보증</span>
+                  </span>
+                  <span class="font-mono opacity-80">CSS Mesh Blur 64px</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- FX 2: Interactive Shimmer Light-Sweep & Neon Aura -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <!-- FX Card: Shimmer Sweep Button -->
+              <div id="fxShimmerCard" class="preview-dynamic rounded-2xl p-6 border transition-all duration-150 flex flex-col justify-between">
+                <div>
+                  <span class="text-xs font-bold uppercase tracking-wider opacity-85 block mb-2">02. 쉬머 광택 스위프 (Shimmer)</span>
+                  <h4 id="fxShimmerTitle" class="text-lg font-bold mb-2">빛이 훑고 지나가는 CTA</h4>
+                  <p id="fxShimmerDesc" class="text-xs sm:text-sm opacity-85 mb-5 leading-relaxed">
+                    프리미엄 결제창 및 로딩 스켈레톤에 사용되는 반사광 이펙트입니다. 광택이 지나가는 순간에도 버튼 글씨가 묻히지 않습니다.
+                  </p>
+                </div>
+                <!-- Shimmer Button with dynamic overflow mask -->
+                <button id="fxShimmerBtn" class="relative overflow-hidden w-full py-3.5 px-5 rounded-xl text-sm font-bold shadow-xl transition active:scale-95 group">
+                  <span class="relative z-10 flex items-center justify-center gap-2">
+                    <span>지금 프리미엄 시작하기</span>
+                    <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </span>
+                  <!-- Animated Shimmer Light Streak -->
+                  <div class="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-25deg] animate-shimmer-sweep pointer-events-none"></div>
                 </button>
               </div>
+
+              <!-- FX Card: Neon Glow Hover & Pulse -->
+              <div id="fxNeonCard" class="preview-dynamic rounded-2xl p-6 border transition-all duration-150 animate-neon-pulse flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold uppercase tracking-wider opacity-85">03. 네온 앰비언트 글로우</span>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full font-mono font-bold bg-violet-500/20 text-violet-300 border border-violet-500/30">PULSING</span>
+                  </div>
+                  <h4 id="fxNeonTitle" class="text-lg font-bold mb-2">숨쉬는 포인트 조명</h4>
+                  <p id="fxNeonDesc" class="text-xs sm:text-sm opacity-85 mb-5 leading-relaxed">
+                    선택한 시작·끝 색상값을 계산하여 카드 테두리 외곽으로 부드럽게 방출되는 발광(Drop-shadow) 효과입니다.
+                  </p>
+                </div>
+                <div class="pt-3 border-t border-current/20 flex items-center justify-between text-xs">
+                  <span class="opacity-80">호버 시 그림자 반경</span>
+                  <span class="font-mono font-bold">28px Soft Glow</span>
+                </div>
+              </div>
             </div>
 
-            <!-- Card Widget 2: Metric / Stat Card -->
-            <div id="previewStatCard" class="preview-dynamic rounded-2xl p-6 border transition-all duration-150 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-3">
-                  <span id="previewStatLabel" class="text-sm font-semibold opacity-85">전환율 통계 (Conversion)</span>
-                  <span class="text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wider" id="previewTrendBadge">+24.8%</span>
+            <!-- FX 3: Glassmorphism & Gradient Clip Typography -->
+            <div id="fxGlassCard" class="preview-dynamic rounded-2xl p-6 sm:p-8 border transition-all duration-150 backdrop-blur-2xl relative overflow-hidden">
+              <div class="max-w-xl">
+                <span class="text-xs font-bold uppercase tracking-wider opacity-85 block mb-2">04. 글래스모피즘 & 그라데이션 타이포</span>
+                <!-- Gradient-clipped dynamic text -->
+                <h3 id="fxGradientTextTitle" class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-3 leading-tight bg-clip-text text-transparent">
+                  배색 그라데이션이 적용된 텍스트
+                </h3>
+                <p id="fxGlassDesc" class="text-sm sm:text-base opacity-90 leading-relaxed mb-6 font-normal">
+                  프로덕트 하이라이트 타이틀에 `background-clip: text` 기법을 적용할 때, 바탕 배경과의 대비를 유지하면서도 입체감을 살릴 수 있는지 테스트합니다.
+                </p>
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="px-3.5 py-1.5 rounded-lg border text-xs font-semibold backdrop-blur-md" id="fxGlassPill1">초정밀 글래스 림 라이트</span>
+                  <span class="px-3.5 py-1.5 rounded-lg border text-xs font-semibold backdrop-blur-md" id="fxGlassPill2">Backdrop-Blur 24px</span>
                 </div>
-                <div id="previewStatNumber" class="text-4xl font-extrabold tracking-tight mt-1">94.2%</div>
-                <p id="previewStatNote" class="text-sm opacity-85 mt-1.5">접근성 개선 후 이탈률 18% 감소</p>
-              </div>
-              <div class="mt-5 pt-3.5 border-t border-current/20 flex items-center justify-between text-sm">
-                <span class="opacity-80">사용자 만족도 점수</span>
-                <span class="font-bold">4.9 / 5.0</span>
               </div>
             </div>
-          </div>
+
+          </div> <!-- /#tabContentFX -->
 
         </div> <!-- /#previewCanvasWrapper -->
 
@@ -524,6 +665,7 @@
       bg2: '#4338CA',
       angle: 135,
       activeTarget: 'text', // 'text' | 'bg1' | 'bg2'
+      activeTab: 'ui',      // 'ui' | 'fx'
       hsv: { h: 0, s: 0, v: 1 }, // Current HSV of the active target for the wheel
       opticalWeightCompensation: true // Dark mode font weight auto-compensation toggle
     };
@@ -916,6 +1058,36 @@
     const previewStatNote = document.getElementById('previewStatNote');
     const previewTrendBadge = document.getElementById('previewTrendBadge');
 
+    // Tab Switcher Elements
+    const tabBtnUI = document.getElementById('tabBtnUI');
+    const tabBtnFX = document.getElementById('tabBtnFX');
+    const tabContentUI = document.getElementById('tabContentUI');
+    const tabContentFX = document.getElementById('tabContentFX');
+
+    // FX Mode Elements
+    const fxAuroraCard = document.getElementById('fxAuroraCard');
+    const fxAuroraBadge = document.getElementById('fxAuroraBadge');
+    const fxAuroraTitle = document.getElementById('fxAuroraTitle');
+    const fxAuroraDesc = document.getElementById('fxAuroraDesc');
+    const fxAuroraBlob1 = document.getElementById('fxAuroraBlob1');
+    const fxAuroraBlob2 = document.getElementById('fxAuroraBlob2');
+    const fxAuroraStatusBox = document.getElementById('fxAuroraStatusBox');
+
+    const fxShimmerCard = document.getElementById('fxShimmerCard');
+    const fxShimmerTitle = document.getElementById('fxShimmerTitle');
+    const fxShimmerDesc = document.getElementById('fxShimmerDesc');
+    const fxShimmerBtn = document.getElementById('fxShimmerBtn');
+
+    const fxNeonCard = document.getElementById('fxNeonCard');
+    const fxNeonTitle = document.getElementById('fxNeonTitle');
+    const fxNeonDesc = document.getElementById('fxNeonDesc');
+
+    const fxGlassCard = document.getElementById('fxGlassCard');
+    const fxGradientTextTitle = document.getElementById('fxGradientTextTitle');
+    const fxGlassDesc = document.getElementById('fxGlassDesc');
+    const fxGlassPill1 = document.getElementById('fxGlassPill1');
+    const fxGlassPill2 = document.getElementById('fxGlassPill2');
+
     // --- Pre-render Base HSV Color Wheel on Offscreen Canvas ---
     const wheelSize = 200;
     const wheelRadius = wheelSize / 2;
@@ -1238,6 +1410,12 @@
       applyCardStyles(previewFormCard);
       applyCardStyles(previewStatCard);
 
+      // Apply card styles to FX Cards as well
+      applyCardStyles(fxAuroraCard);
+      applyCardStyles(fxShimmerCard);
+      applyCardStyles(fxNeonCard);
+      applyCardStyles(fxGlassCard);
+
       // 1. Hero Card
       previewHeroCard.style.color = text;
       previewHeroTitle.style.color = text;
@@ -1286,6 +1464,45 @@
       previewStatNote.style.color = text;
       previewTrendBadge.style.backgroundColor = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.15)`;
       previewTrendBadge.style.color = text;
+
+      // --- MODERN FX COMPONENT DYNAMIC UPDATES ---
+      // FX 1: Aurora Flow
+      fxAuroraCard.style.color = text;
+      fxAuroraTitle.style.color = text;
+      fxAuroraTitle.style.fontWeight = applyCompensation ? '600' : '800';
+      fxAuroraDesc.style.color = text;
+      fxAuroraBadge.style.backgroundColor = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.12)`;
+      fxAuroraBadge.style.borderColor = cardBorderStyle;
+      fxAuroraBadge.style.color = text;
+      fxAuroraBlob1.style.backgroundColor = bg2;
+      fxAuroraBlob2.style.backgroundColor = text;
+      fxAuroraStatusBox.style.backgroundColor = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.06)`;
+      fxAuroraStatusBox.style.borderColor = cardBorderStyle;
+
+      // FX 2: Shimmer CTA Button & Card
+      fxShimmerCard.style.color = text;
+      fxShimmerTitle.style.color = text;
+      fxShimmerDesc.style.color = text;
+      fxShimmerBtn.style.backgroundColor = text;
+      fxShimmerBtn.style.color = (lumT > 0.5) ? bg1 : '#FFFFFF';
+      fxShimmerBtn.style.fontWeight = applyCompensation ? '600' : '700';
+
+      // FX 3: Neon Aura Card (Dynamic CSS Variable Injection)
+      fxNeonCard.style.color = text;
+      fxNeonTitle.style.color = text;
+      fxNeonDesc.style.color = text;
+      fxNeonCard.style.setProperty('--neon-glow', `rgba(${rgbB2.r}, ${rgbB2.g}, ${rgbB2.b}, 0.55)`);
+
+      // FX 4: Glassmorphism & Gradient Clip Typography
+      fxGlassCard.style.color = text;
+      fxGlassDesc.style.color = text;
+      // Invert gradient or use high-saturation text gradient
+      fxGradientTextTitle.style.backgroundImage = `linear-gradient(135deg, ${text}, ${bg2})`;
+      fxGradientTextTitle.style.fontWeight = applyCompensation ? '700' : '800';
+      fxGlassPill1.style.borderColor = cardBorderStyle;
+      fxGlassPill1.style.backgroundColor = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.1)`;
+      fxGlassPill2.style.borderColor = cardBorderStyle;
+      fxGlassPill2.style.backgroundColor = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.1)`;
 
       renderCompanionTokens();
     }
@@ -1451,11 +1668,31 @@
       valueSliderTrack.addEventListener('pointercancel', () => { draggingValue = false; });
     }
 
+    // --- Tab Switching Logic ---
+    function setPreviewTab(tabKey) {
+      state.activeTab = tabKey;
+      if (tabKey === 'ui') {
+        tabBtnUI.className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-violet-600 text-white shadow-sm';
+        tabBtnFX.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 text-slate-400 hover:text-slate-200';
+        tabContentUI.classList.remove('hidden');
+        tabContentFX.classList.add('hidden');
+      } else {
+        tabBtnFX.className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-violet-600 text-white shadow-sm';
+        tabBtnUI.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 text-slate-400 hover:text-slate-200';
+        tabContentFX.classList.remove('hidden');
+        tabContentUI.classList.add('hidden');
+      }
+    }
+
     // --- Initialize Listeners ---
     function initListeners() {
       slotText.addEventListener('click', () => setActiveTarget('text'));
       slotBg1.addEventListener('click', () => setActiveTarget('bg1'));
       slotBg2.addEventListener('click', () => setActiveTarget('bg2'));
+
+      // Tab switcher clicks
+      tabBtnUI.addEventListener('click', () => setPreviewTab('ui'));
+      tabBtnFX.addEventListener('click', () => setPreviewTab('fx'));
 
       bindHexInput(hexText, 'text');
       bindHexInput(hexBg1, 'bg1');
