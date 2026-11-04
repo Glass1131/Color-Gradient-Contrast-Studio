@@ -1,1 +1,1012 @@
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Gradient & Contrast Studio | WCAG 접근성 & 실무 UI 배색기</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & Pretendard -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              700: '#6d28d9',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom Color Picker Swatch Styling */
+    input[type="color"] {
+      -webkit-appearance: none;
+      border: none;
+      width: 100%;
+      height: 100%;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      background: none;
+    }
+    input[type="color"]::-webkit-color-swatch-wrapper {
+      padding: 0;
+    }
+    input[type="color"]::-webkit-color-swatch {
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 0.5rem;
+    }
+    /* Smooth Transitions */
+    .preview-dynamic {
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans selection:bg-purple-500 selection:text-white pb-16 antialiased">
 
+  <!-- Header -->
+  <header class="border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-violet-600 to-indigo-400 flex items-center justify-center shadow-lg shadow-violet-500/25">
+          <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-base sm:text-lg font-bold tracking-tight text-white flex items-center gap-2">
+            Gradient & Contrast Studio
+            <span class="text-[10px] font-semibold bg-violet-500/20 text-violet-300 border border-violet-500/30 px-2 py-0.5 rounded-full uppercase tracking-wider">WCAG 2.1</span>
+          </h1>
+          <p class="text-xs text-slate-400 hidden sm:block">실시간 가독성 계산 및 실무 컴포넌트 프리뷰 시뮬레이터</p>
+        </div>
+      </div>
+
+      <!-- Quick Preset Dropdown & Random -->
+      <div class="flex items-center space-x-2">
+        <button id="btnRandomize" title="랜덤 배색 추천" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 transition border border-slate-700 flex items-center gap-1.5 shadow-sm active:scale-95">
+          <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+          <span class="hidden sm:inline">랜덤 팔레트</span>
+        </button>
+        <button id="btnSwap" title="배경색과 글자색 맞바꾸기" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 transition border border-slate-700 flex items-center gap-1.5 shadow-sm active:scale-95">
+          <svg class="w-3.5 h-3.5 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+          </svg>
+          <span>색상 반전</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Presets Bar -->
+  <div class="bg-slate-900/40 border-b border-slate-800/60 py-2.5 overflow-x-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 text-xs whitespace-nowrap">
+      <span class="text-slate-400 font-medium mr-1 flex items-center gap-1">
+        <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+        </svg>
+        실무 프리셋:
+      </span>
+      <div id="presetsList" class="flex items-center gap-2">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+      <!-- LEFT COLUMN: Controls, WCAG Evaluation & Sub-palette (5 Cols) -->
+      <div class="lg:col-span-5 space-y-6">
+
+        <!-- 1. Color Picker Panel -->
+        <section class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl backdrop-blur-sm">
+          <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-4 flex items-center justify-between">
+            <span>색상 설정 (Color Inputs)</span>
+            <span class="text-[11px] text-slate-400 normal-case">HEX 직접 입력 가능</span>
+          </h2>
+
+          <div class="space-y-4">
+            <!-- Text Color -->
+            <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-800/80">
+              <label class="text-xs font-semibold text-slate-300 block mb-2 flex items-center justify-between">
+                <span>텍스트 색상 (Text Color)</span>
+                <span id="textLuminanceBadge" class="text-[10px] text-slate-400 font-mono">밝기: 0.00</span>
+              </label>
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-lg overflow-hidden border border-slate-700 shrink-0 shadow-inner">
+                  <input type="color" id="pickerText" value="#FFFFFF">
+                </div>
+                <div class="relative flex-1">
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-mono font-bold">#</span>
+                  <input type="text" id="hexText" value="FFFFFF" maxlength="7" class="w-full bg-slate-900 border border-slate-700/80 rounded-lg pl-7 pr-3 py-2 text-xs font-mono text-slate-100 uppercase focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition">
+                </div>
+              </div>
+            </div>
+
+            <!-- Gradient Start Color -->
+            <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-800/80">
+              <label class="text-xs font-semibold text-slate-300 block mb-2 flex items-center justify-between">
+                <span>배경 시작 색상 (Start Color)</span>
+                <span id="bg1LuminanceBadge" class="text-[10px] text-slate-400 font-mono">밝기: 0.00</span>
+              </label>
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-lg overflow-hidden border border-slate-700 shrink-0 shadow-inner">
+                  <input type="color" id="pickerBg1" value="#1E1B4B">
+                </div>
+                <div class="relative flex-1">
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-mono font-bold">#</span>
+                  <input type="text" id="hexBg1" value="1E1B4B" maxlength="7" class="w-full bg-slate-900 border border-slate-700/80 rounded-lg pl-7 pr-3 py-2 text-xs font-mono text-slate-100 uppercase focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition">
+                </div>
+              </div>
+            </div>
+
+            <!-- Gradient End Color -->
+            <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-800/80">
+              <label class="text-xs font-semibold text-slate-300 block mb-2 flex items-center justify-between">
+                <span>배경 끝 색상 (End Color)</span>
+                <span id="bg2LuminanceBadge" class="text-[10px] text-slate-400 font-mono">밝기: 0.00</span>
+              </label>
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-lg overflow-hidden border border-slate-700 shrink-0 shadow-inner">
+                  <input type="color" id="pickerBg2" value="#4338CA">
+                </div>
+                <div class="relative flex-1">
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-mono font-bold">#</span>
+                  <input type="text" id="hexBg2" value="4338CA" maxlength="7" class="w-full bg-slate-900 border border-slate-700/80 rounded-lg pl-7 pr-3 py-2 text-xs font-mono text-slate-100 uppercase focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition">
+                </div>
+              </div>
+            </div>
+
+            <!-- Gradient Angle Slider -->
+            <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-800/80">
+              <div class="flex items-center justify-between text-xs font-semibold text-slate-300 mb-2">
+                <span>그라데이션 각도 (Angle)</span>
+                <span id="angleValue" class="text-violet-400 font-mono">135°</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <input type="range" id="angleSlider" min="0" max="360" value="135" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-violet-500">
+                <div class="flex gap-1">
+                  <button type="button" class="btn-quick-angle px-1.5 py-0.5 text-[10px] bg-slate-800 hover:bg-slate-700 rounded text-slate-300 font-mono" data-deg="90">90°</button>
+                  <button type="button" class="btn-quick-angle px-1.5 py-0.5 text-[10px] bg-slate-800 hover:bg-slate-700 rounded text-slate-300 font-mono" data-deg="135">135°</button>
+                  <button type="button" class="btn-quick-angle px-1.5 py-0.5 text-[10px] bg-slate-800 hover:bg-slate-700 rounded text-slate-300 font-mono" data-deg="180">180°</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. WCAG Contrast Score Card (Option A: Worst-case evaluation) -->
+        <section class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl backdrop-blur-sm relative overflow-hidden">
+          <div class="flex items-center justify-between mb-3">
+            <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-400">
+              가독성 평가 (WCAG Contrast)
+            </h2>
+            <!-- Auto Fix Button -->
+            <button id="btnAutoFix" class="px-2.5 py-1 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-medium transition flex items-center gap-1 active:scale-95 shadow-sm">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              <span>4.5:1 자동 보정</span>
+            </button>
+          </div>
+
+          <!-- Score Banner -->
+          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800/80 mb-4">
+            <div class="flex items-baseline justify-between mb-1">
+              <span class="text-xs text-slate-400 font-medium">최저 명암비 (Worst-case)</span>
+              <span id="contrastVerdictBadge" class="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-800 text-slate-300">계산 중</span>
+            </div>
+            <div class="flex items-baseline gap-2">
+              <span id="worstContrastScore" class="text-4xl font-black tracking-tight text-white font-mono">-- : 1</span>
+              <span class="text-xs text-slate-400">/ 최저 기준</span>
+            </div>
+            <p id="worstConditionNote" class="text-[11px] text-slate-400 mt-2">
+              그라데이션 양 끝 중 글자가 더 읽기 어려운 쪽을 기준으로 평가합니다.
+            </p>
+
+            <!-- Dual Side Comparison Breakdown -->
+            <div class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-slate-800/60 text-xs">
+              <div class="bg-slate-900/60 p-2 rounded-lg flex items-center justify-between">
+                <span class="text-slate-400 flex items-center gap-1.5">
+                  <span id="dotBg1" class="w-2.5 h-2.5 rounded-full border border-white/20"></span>
+                  시작색 대비:
+                </span>
+                <span id="scoreBg1" class="font-mono font-bold text-slate-200">--:1</span>
+              </div>
+              <div class="bg-slate-900/60 p-2 rounded-lg flex items-center justify-between">
+                <span class="text-slate-400 flex items-center gap-1.5">
+                  <span id="dotBg2" class="w-2.5 h-2.5 rounded-full border border-white/20"></span>
+                  끝색 대비:
+                </span>
+                <span id="scoreBg2" class="font-mono font-bold text-slate-200">--:1</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Badges Table -->
+          <div class="grid grid-cols-2 gap-3 text-center">
+            <!-- Normal Text -->
+            <div class="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+              <span class="text-xs font-medium text-slate-400 block mb-1">일반 본문 (Normal Text)</span>
+              <div class="flex items-center justify-center gap-2 mt-2">
+                <span id="badgeNormalAA" class="px-2 py-0.5 text-xs font-bold rounded border">AA (4.5)</span>
+                <span id="badgeNormalAAA" class="px-2 py-0.5 text-xs font-bold rounded border">AAA (7.0)</span>
+              </div>
+            </div>
+
+            <!-- Large Text -->
+            <div class="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+              <span class="text-xs font-medium text-slate-400 block mb-1">큰 글자 / 헤딩 (Large Text)</span>
+              <div class="flex items-center justify-center gap-2 mt-2">
+                <span id="badgeLargeAA" class="px-2 py-0.5 text-xs font-bold rounded border">AA (3.0)</span>
+                <span id="badgeLargeAAA" class="px-2 py-0.5 text-xs font-bold rounded border">AAA (4.5)</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Practical UI Sub-colors (실무용 보조 색상 추천) -->
+        <section class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl backdrop-blur-sm">
+          <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-1">
+            실무 보조 색상 (UI Companion Tokens)
+          </h2>
+          <p class="text-xs text-slate-400 mb-3">클릭하면 HEX 코드가 클립보드로 복사됩니다.</p>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5" id="companionPaletteGrid">
+            <!-- Dynamic tokens rendered by JS -->
+          </div>
+        </section>
+
+        <!-- 4. Quick Code Export -->
+        <section class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl backdrop-blur-sm">
+          <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-3">
+            원클릭 코드 복사 (Quick Export)
+          </h2>
+          <div class="space-y-2">
+            <button id="btnCopyCssGradient" class="w-full py-2.5 px-4 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-200 text-xs font-medium rounded-xl border border-slate-700/80 transition flex items-center justify-between group">
+              <span class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+                <span>CSS 그라데이션 코드 복사</span>
+              </span>
+              <span class="text-[10px] text-slate-400 group-hover:text-slate-200 font-mono">background: linear-gradient...</span>
+            </button>
+
+            <button id="btnCopyHexes" class="w-full py-2.5 px-4 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-200 text-xs font-medium rounded-xl border border-slate-700/80 transition flex items-center justify-between group">
+              <span class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                <span>HEX 코드 모음 복사</span>
+              </span>
+              <span class="text-[10px] text-slate-400 group-hover:text-slate-200 font-mono">Text / Start / End</span>
+            </button>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- RIGHT COLUMN: Real-Time Live UI Component Preview (7 Cols) -->
+      <div class="lg:col-span-7 space-y-6">
+
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-lg font-bold text-white tracking-tight flex items-center gap-2">
+              실시간 UI 컴포넌트 시뮬레이션
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            </h2>
+            <p class="text-xs text-slate-400">색상 피커를 움직이면 아래의 모든 실제 UI 예시가 즉시 동기화됩니다.</p>
+          </div>
+          <span class="text-[11px] bg-slate-800 border border-slate-700 text-slate-300 px-2.5 py-1 rounded-md">Live Preview</span>
+        </div>
+
+        <!-- 1. Hero Feature / Card UI -->
+        <div id="previewHeroCard" class="preview-dynamic rounded-2xl p-6 sm:p-8 shadow-2xl border transition-all duration-150 relative overflow-hidden">
+          <div class="max-w-md">
+            <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full text-xs font-medium mb-4 backdrop-blur-sm border shadow-sm" id="previewBadge">
+              <span class="w-1.5 h-1.5 rounded-full bg-current opacity-80"></span>
+              <span>2026 차세대 디자인 시스템</span>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2 leading-tight">
+              완벽한 가독성과 심미성을 갖춘 UI 배색
+            </h3>
+            <p class="text-sm sm:text-base opacity-90 mb-6 leading-relaxed font-normal">
+              배경과 글자 사이의 명암비를 실시간으로 점검하고, 사용자가 어떤 환경에서도 편안하게 읽을 수 있는 인터페이스를 완성하세요.
+            </p>
+            <div class="flex flex-wrap items-center gap-3">
+              <button id="previewBtnPrimary" class="px-5 py-2.5 rounded-xl text-xs font-bold shadow-lg transition active:scale-95 flex items-center gap-2">
+                <span>프로젝트 시작하기</span>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </button>
+              <button id="previewBtnSecondary" class="px-4 py-2.5 rounded-xl text-xs font-medium transition active:scale-95 border">
+                문서 확인
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Typography Scale Check (Headings & Body) -->
+        <div class="bg-slate-900/90 rounded-2xl p-6 border border-slate-800 shadow-xl">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+            <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400">타이포그래피 가독성 테스트 (Typography Scale)</h3>
+            <span class="text-[11px] text-slate-400">크기별 가독성 차이 체감</span>
+          </div>
+
+          <!-- Sandbox Area with Dynamic Background -->
+          <div id="previewTypoContainer" class="preview-dynamic p-6 rounded-xl border transition-all duration-150 space-y-4">
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-[11px] opacity-70 font-mono">Heading 1 (28px Bold) — 대형 텍스트 (3.0:1 이상 통과)</span>
+              </div>
+              <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">
+                디지털 프로덕트 디자인 가이드라인
+              </h1>
+            </div>
+
+            <div class="pt-2 border-t border-current/10">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-[11px] opacity-70 font-mono">Body Regular (15px) — 일반 텍스트 (4.5:1 이상 통과)</span>
+              </div>
+              <p class="text-sm leading-relaxed">
+                시각적 계층 구조(Visual Hierarchy)는 사용자가 정보를 신속하게 탐색하도록 돕습니다. 본문 텍스트는 긴 문장에서도 눈의 피로도를 낮추기 위해 충분한 명암비가 필수적입니다.
+              </p>
+            </div>
+
+            <div class="pt-2 border-t border-current/10">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-[11px] opacity-70 font-mono">Small Caption (12px Muted) — 보조 텍스트</span>
+              </div>
+              <p class="text-xs opacity-75 font-medium">
+                * 마지막 업데이트: 2026-11-03 · WCAG 2.1 Level AA 규격 검증 완료
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Form Input & Action Bar Mockup -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Card Widget 1: Interactive Form -->
+          <div id="previewFormCard" class="preview-dynamic rounded-2xl p-5 border shadow-xl transition-all duration-150">
+            <h4 class="text-sm font-bold mb-1">뉴스레터 구독 신청</h4>
+            <p class="text-xs opacity-80 mb-4">최신 디자인 토큰 업데이트 소식을 받아보세요.</p>
+            <div class="space-y-2.5">
+              <input type="text" placeholder="이메일 주소를 입력하세요" id="previewInput" class="w-full px-3 py-2 text-xs rounded-lg border outline-none placeholder:opacity-50 transition" readonly value="designer@company.com">
+              <button id="previewBtnSubmit" class="w-full py-2 px-3 rounded-lg text-xs font-semibold shadow transition active:scale-95">
+                구독하기
+              </button>
+            </div>
+          </div>
+
+          <!-- Card Widget 2: Metric / Stat Card -->
+          <div id="previewStatCard" class="preview-dynamic rounded-2xl p-5 border shadow-xl transition-all duration-150 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-semibold opacity-80">전환율 통계 (Conversion)</span>
+                <span class="text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider" id="previewTrendBadge">+24.8%</span>
+              </div>
+              <div class="text-3xl font-extrabold tracking-tight mt-1">94.2%</div>
+              <p class="text-xs opacity-75 mt-1">접근성 개선 후 이탈률 18% 감소</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-current/10 flex items-center justify-between text-xs">
+              <span class="opacity-75">사용자 만족도 점수</span>
+              <span class="font-bold">4.9 / 5.0</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Toast Notification (Hidden by default, purely accessible) -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 bg-slate-800 text-white border border-slate-700 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      </svg>
+    </div>
+    <div class="text-xs">
+      <div id="toastTitle" class="font-bold">복사 완료</div>
+      <div id="toastMessage" class="text-slate-400 text-[11px]">클립보드에 복사되었습니다.</div>
+    </div>
+  </div>
+
+  <!-- JavaScript Implementation -->
+  <script>
+    // --- Application State ---
+    const state = {
+      text: '#FFFFFF',
+      bg1: '#1E1B4B',
+      bg2: '#4338CA',
+      angle: 135
+    };
+
+    // --- Curated Practical Presets ---
+    const PRESETS = [
+      { name: '딥 오로라', text: '#38BDF8', bg1: '#0F172A', bg2: '#1E1B4B', angle: 135 },
+      { name: '모던 퍼플', text: '#FDF4FF', bg1: '#3B0764', bg2: '#6B21A8', angle: 135 },
+      { name: '에메랄드 포레스트', text: '#ECFDF5', bg1: '#064E3B', bg2: '#047857', angle: 120 },
+      { name: '선셋 앰버', text: '#18181B', bg1: '#FB923C', bg2: '#FBBF24', angle: 90 },
+      { name: '소프트 네오', text: '#0F172A', bg1: '#E2E8F0', bg2: '#CBD5E1', angle: 135 },
+      { name: '다크 옵시디언', text: '#E2E8F0', bg1: '#090D16', bg2: '#1A2333', angle: 180 },
+    ];
+
+    // --- Color Math Helpers ---
+    function hexToRgb(hex) {
+      hex = hex.replace('#', '').trim();
+      if (hex.length === 3) {
+        hex = hex.split('').map(c => c + c).join('');
+      }
+      if (hex.length !== 6) return { r: 0, g: 0, b: 0 };
+      const num = parseInt(hex, 16);
+      if (isNaN(num)) return { r: 0, g: 0, b: 0 };
+      return {
+        r: (num >> 16) & 255,
+        g: (num >> 8) & 255,
+        b: num & 255
+      };
+    }
+
+    function rgbToHex(r, g, b) {
+      const toHex = (c) => Math.max(0, Math.min(255, Math.round(c))).toString(16).padStart(2, '0');
+      return `#${toHex(r)}${toHex(g)}${toHex(b)}`.toUpperCase();
+    }
+
+    // Relative Luminance according to WCAG 2.1
+    function getLuminance(r, g, b) {
+      const a = [r, g, b].map(v => {
+        v /= 255;
+        return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+      });
+      return 0.2126 * a[0] + 0.7152 * a[1] + 0.0722 * a[2];
+    }
+
+    // Contrast Ratio between two relative luminances
+    function getContrastRatio(lum1, lum2) {
+      const lighter = Math.max(lum1, lum2);
+      const darker = Math.min(lum1, lum2);
+      return (lighter + 0.05) / (darker + 0.05);
+    }
+
+    // RGB to HSL and HSL to RGB for Auto-Fix
+    function rgbToHsl(r, g, b) {
+      r /= 255; g /= 255; b /= 255;
+      const max = Math.max(r, g, b), min = Math.min(r, g, b);
+      let h, s, l = (max + min) / 2;
+
+      if (max === min) {
+        h = s = 0; // achromatic
+      } else {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+          case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+          case g: h = (b - r) / d + 2; break;
+          case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+      }
+      return { h, s, l };
+    }
+
+    function hslToRgb(h, s, l) {
+      let r, g, b;
+      if (s === 0) {
+        r = g = b = l; // achromatic
+      } else {
+        const hue2rgb = (p, q, t) => {
+          if (t < 0) t += 1;
+          if (t > 1) t -= 1;
+          if (t < 1/6) return p + (q - p) * 6 * t;
+          if (t < 1/2) return q;
+          if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+          return p;
+        };
+        const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        const p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1/3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1/3);
+      }
+      return { r: Math.round(r * 255), g: Math.round(g * 255), b: Math.round(b * 255) };
+    }
+
+    // Auto Fix text color to reach at least 4.5:1 against both bg1 and bg2
+    function autoFixTextColor(bg1Hex, bg2Hex, currentTextHex) {
+      const rgbBg1 = hexToRgb(bg1Hex);
+      const rgbBg2 = hexToRgb(bg2Hex);
+      const lumBg1 = getLuminance(rgbBg1.r, rgbBg1.g, rgbBg1.b);
+      const lumBg2 = getLuminance(rgbBg2.r, rgbBg2.g, rgbBg2.b);
+      const avgBgLum = (lumBg1 + lumBg2) / 2;
+
+      const rgbText = hexToRgb(currentTextHex);
+      const hsl = rgbToHsl(rgbText.r, rgbText.g, rgbText.b);
+
+      // Determine search direction (towards white 1.0 or black 0.0)
+      const targetTowardsWhite = avgBgLum < 0.35;
+      let bestHex = currentTextHex;
+      let reached = false;
+
+      const steps = 100;
+      for (let i = 0; i <= steps; i++) {
+        let testL = targetTowardsWhite 
+          ? hsl.l + (1 - hsl.l) * (i / steps) 
+          : hsl.l * (1 - (i / steps));
+        testL = Math.max(0, Math.min(1, testL));
+
+        const testRgb = hslToRgb(hsl.h, hsl.s, testL);
+        const testLum = getLuminance(testRgb.r, testRgb.g, testRgb.b);
+        const r1 = getContrastRatio(lumBg1, testLum);
+        const r2 = getContrastRatio(lumBg2, testLum);
+        const worst = Math.min(r1, r2);
+
+        if (worst >= 4.51) {
+          bestHex = rgbToHex(testRgb.r, testRgb.g, testRgb.b);
+          reached = true;
+          break;
+        }
+      }
+
+      if (!reached) {
+        // Fallback to extreme if tinted color couldn't satisfy
+        bestHex = targetTowardsWhite ? '#FFFFFF' : '#000000';
+      }
+      return bestHex;
+    }
+
+    // Generate Practical UI Companion Tokens based on inputs
+    function generateCompanionTokens(textHex, bg1Hex, bg2Hex) {
+      const rgbText = hexToRgb(textHex);
+      const rgbBg1 = hexToRgb(bg1Hex);
+      const rgbBg2 = hexToRgb(bg2Hex);
+      const textLum = getLuminance(rgbText.r, rgbText.g, rgbText.b);
+      const isDarkText = textLum < 0.5;
+
+      // Button Hover (Lighten or darken background endpoint)
+      const hoverR = Math.min(255, Math.max(0, Math.round(rgbBg2.r + (isDarkText ? -20 : 25))));
+      const hoverG = Math.min(255, Math.max(0, Math.round(rgbBg2.g + (isDarkText ? -20 : 25))));
+      const hoverB = Math.min(255, Math.max(0, Math.round(rgbBg2.b + (isDarkText ? -20 : 25))));
+      const hoverHex = rgbToHex(hoverR, hoverG, hoverB);
+
+      // Muted Subtitle / Secondary Text (tinted towards background)
+      const mutedR = Math.round(rgbText.r * 0.7 + rgbBg1.r * 0.3);
+      const mutedG = Math.round(rgbText.g * 0.7 + rgbBg1.g * 0.3);
+      const mutedB = Math.round(rgbText.b * 0.7 + rgbBg1.b * 0.3);
+      const mutedHex = rgbToHex(mutedR, mutedG, mutedB);
+
+      // Subtle Border / Divider Color
+      const borderR = Math.round(rgbText.r * 0.25 + rgbBg1.r * 0.75);
+      const borderG = Math.round(rgbText.g * 0.25 + rgbBg1.g * 0.75);
+      const borderB = Math.round(rgbText.b * 0.25 + rgbBg1.b * 0.75);
+      const borderHex = rgbToHex(borderR, borderG, borderB);
+
+      // Accent Highlight Pill
+      const hsl1 = rgbToHsl(rgbBg1.r, rgbBg1.g, rgbBg1.b);
+      const accentRgb = hslToRgb((hsl1.h + 0.5) % 1, Math.max(0.6, hsl1.s), 0.55);
+      const accentHex = rgbToHex(accentRgb.r, accentRgb.g, accentRgb.b);
+
+      // Container Card Tint
+      const cardBgR = Math.round(rgbBg1.r * 0.85 + (isDarkText ? 255 : 0) * 0.15);
+      const cardBgG = Math.round(rgbBg1.g * 0.85 + (isDarkText ? 255 : 0) * 0.15);
+      const cardBgB = Math.round(rgbBg1.b * 0.85 + (isDarkText ? 255 : 0) * 0.15);
+      const cardBgHex = rgbToHex(cardBgR, cardBgG, cardBgB);
+
+      return [
+        { label: 'Button Hover', hex: hoverHex, desc: '버튼 호버 상태' },
+        { label: 'Muted Text', hex: mutedHex, desc: '보조 설명 텍스트' },
+        { label: 'Border Color', hex: borderHex, desc: '카드 외곽선/구분선' },
+        { label: 'Accent Pill', hex: accentHex, desc: '포인트 뱃지/강조' },
+        { label: 'Card Surface', hex: cardBgHex, desc: '내부 위젯 배경' }
+      ];
+    }
+
+    // --- DOM Elements ---
+    const pickerText = document.getElementById('pickerText');
+    const hexText = document.getElementById('hexText');
+    const pickerBg1 = document.getElementById('pickerBg1');
+    const hexBg1 = document.getElementById('hexBg1');
+    const pickerBg2 = document.getElementById('pickerBg2');
+    const hexBg2 = document.getElementById('hexBg2');
+    const angleSlider = document.getElementById('angleSlider');
+    const angleValue = document.getElementById('angleValue');
+
+    const worstContrastScore = document.getElementById('worstContrastScore');
+    const worstConditionNote = document.getElementById('worstConditionNote');
+    const contrastVerdictBadge = document.getElementById('contrastVerdictBadge');
+    const scoreBg1 = document.getElementById('scoreBg1');
+    const scoreBg2 = document.getElementById('scoreBg2');
+    const dotBg1 = document.getElementById('dotBg1');
+    const dotBg2 = document.getElementById('dotBg2');
+    const textLuminanceBadge = document.getElementById('textLuminanceBadge');
+    const bg1LuminanceBadge = document.getElementById('bg1LuminanceBadge');
+    const bg2LuminanceBadge = document.getElementById('bg2LuminanceBadge');
+
+    const badgeNormalAA = document.getElementById('badgeNormalAA');
+    const badgeNormalAAA = document.getElementById('badgeNormalAAA');
+    const badgeLargeAA = document.getElementById('badgeLargeAA');
+    const badgeLargeAAA = document.getElementById('badgeLargeAAA');
+
+    const companionPaletteGrid = document.getElementById('companionPaletteGrid');
+    const presetsList = document.getElementById('presetsList');
+
+    // UI Preview Elements
+    const previewHeroCard = document.getElementById('previewHeroCard');
+    const previewBadge = document.getElementById('previewBadge');
+    const previewBtnPrimary = document.getElementById('previewBtnPrimary');
+    const previewBtnSecondary = document.getElementById('previewBtnSecondary');
+    const previewTypoContainer = document.getElementById('previewTypoContainer');
+    const previewFormCard = document.getElementById('previewFormCard');
+    const previewInput = document.getElementById('previewInput');
+    const previewBtnSubmit = document.getElementById('previewBtnSubmit');
+    const previewStatCard = document.getElementById('previewStatCard');
+    const previewTrendBadge = document.getElementById('previewTrendBadge');
+
+    // --- Toast Handler ---
+    function showToast(title, message) {
+      const toast = document.getElementById('toast');
+      const toastTitle = document.getElementById('toastTitle');
+      const toastMessage = document.getElementById('toastMessage');
+
+      toastTitle.textContent = title;
+      toastMessage.textContent = message;
+
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      clearTimeout(window._toastTimeout);
+      window._toastTimeout = setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2200);
+    }
+
+    // Reliable Clipboard Copier with Fallback
+    function copyTextToClipboard(text, successTitle = '복사 완료', successMsg = '클립보드에 복사되었습니다.') {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(successTitle, successMsg);
+        }).catch(() => {
+          fallbackCopyText(text, successTitle, successMsg);
+        });
+      } else {
+        fallbackCopyText(text, successTitle, successMsg);
+      }
+    }
+
+    function fallbackCopyText(text, successTitle, successMsg) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-999999px";
+      textArea.style.top = "-999999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+          showToast(successTitle, successMsg);
+        } else {
+          showToast('복사 실패', '브라우저 권한을 확인해주세요.');
+        }
+      } catch (err) {
+        showToast('복사 오류', '수동으로 복사해주세요.');
+      }
+      document.body.removeChild(textArea);
+    }
+
+    // --- Badge Styler Utility ---
+    function setBadgeStatus(el, passed) {
+      if (passed) {
+        el.className = "px-2 py-0.5 text-xs font-bold rounded border bg-emerald-500/20 text-emerald-300 border-emerald-500/40";
+      } else {
+        el.className = "px-2 py-0.5 text-xs font-bold rounded border bg-rose-500/10 text-rose-400 border-rose-500/20 line-through opacity-75";
+      }
+    }
+
+    // --- Main Render / Calculation Engine ---
+    function updateApp() {
+      const { text, bg1, bg2, angle } = state;
+      const gradientCSS = `linear-gradient(${angle}deg, ${bg1}, ${bg2})`;
+
+      // Luminance Calculations
+      const rgbT = hexToRgb(text);
+      const rgbB1 = hexToRgb(bg1);
+      const rgbB2 = hexToRgb(bg2);
+
+      const lumT = getLuminance(rgbT.r, rgbT.g, rgbT.b);
+      const lumB1 = getLuminance(rgbB1.r, rgbB1.g, rgbB1.b);
+      const lumB2 = getLuminance(rgbB2.r, rgbB2.g, rgbB2.b);
+
+      textLuminanceBadge.textContent = `밝기: ${lumT.toFixed(2)}`;
+      bg1LuminanceBadge.textContent = `밝기: ${lumB1.toFixed(2)}`;
+      bg2LuminanceBadge.textContent = `밝기: ${lumB2.toFixed(2)}`;
+
+      // Contrast Ratios
+      const r1 = getContrastRatio(lumB1, lumT);
+      const r2 = getContrastRatio(lumB2, lumT);
+      const worstRatio = Math.min(r1, r2);
+
+      scoreBg1.textContent = `${r1.toFixed(2)}:1`;
+      scoreBg2.textContent = `${r2.toFixed(2)}:1`;
+      dotBg1.style.backgroundColor = bg1;
+      dotBg2.style.backgroundColor = bg2;
+
+      worstContrastScore.textContent = `${worstRatio.toFixed(2)} : 1`;
+
+      // Worst Condition Explanation
+      const isB1Worst = r1 <= r2;
+      worstConditionNote.textContent = isB1Worst 
+        ? `배경 시작색(${bg1.toUpperCase()}) 영역에서 글자 대비가 더 취약합니다.`
+        : `배경 끝색(${bg2.toUpperCase()}) 영역에서 글자 대비가 더 취약합니다.`;
+
+      // WCAG Compliance evaluation
+      const passNormalAA = worstRatio >= 4.5;
+      const passNormalAAA = worstRatio >= 7.0;
+      const passLargeAA = worstRatio >= 3.0;
+      const passLargeAAA = worstRatio >= 4.5;
+
+      setBadgeStatus(badgeNormalAA, passNormalAA);
+      setBadgeStatus(badgeNormalAAA, passNormalAAA);
+      setBadgeStatus(badgeLargeAA, passLargeAA);
+      setBadgeStatus(badgeLargeAAA, passLargeAAA);
+
+      // Contrast Verdict Badge
+      if (passNormalAAA) {
+        contrastVerdictBadge.textContent = '최우수 (AAA 등급)';
+        contrastVerdictBadge.className = 'text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40';
+      } else if (passNormalAA) {
+        contrastVerdictBadge.textContent = '적합 (AA 등급)';
+        contrastVerdictBadge.className = 'text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
+      } else if (passLargeAA) {
+        contrastVerdictBadge.textContent = '헤딩 전용 (대형 텍스트만 통과)';
+        contrastVerdictBadge.className = 'text-xs font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40';
+      } else {
+        contrastVerdictBadge.textContent = '가독성 부족 (탈락)';
+        contrastVerdictBadge.className = 'text-xs font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/40';
+      }
+
+      // --- Update Live UI Preview Gallery ---
+      previewHeroCard.style.background = gradientCSS;
+      previewHeroCard.style.color = text;
+      previewHeroCard.style.borderColor = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.2)`;
+
+      previewBadge.style.backgroundColor = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.12)`;
+      previewBadge.style.borderColor = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.25)`;
+      previewBadge.style.color = text;
+
+      // Primary Button styling in Hero
+      previewBtnPrimary.style.backgroundColor = text;
+      previewBtnPrimary.style.color = (lumT > 0.5) ? '#0F172A' : '#FFFFFF';
+
+      // Secondary Button styling
+      previewBtnSecondary.style.borderColor = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.35)`;
+      previewBtnSecondary.style.color = text;
+      previewBtnSecondary.style.backgroundColor = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.08)`;
+
+      // Typography Sandbox Container
+      previewTypoContainer.style.background = gradientCSS;
+      previewTypoContainer.style.color = text;
+      previewTypoContainer.style.borderColor = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.2)`;
+
+      // Form Card
+      previewFormCard.style.background = gradientCSS;
+      previewFormCard.style.color = text;
+      previewFormCard.style.borderColor = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.2)`;
+      previewInput.style.backgroundColor = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.08)`;
+      previewInput.style.borderColor = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.3)`;
+      previewInput.style.color = text;
+      previewBtnSubmit.style.backgroundColor = text;
+      previewBtnSubmit.style.color = (lumT > 0.5) ? '#0F172A' : '#FFFFFF';
+
+      // Stat Card
+      previewStatCard.style.background = gradientCSS;
+      previewStatCard.style.color = text;
+      previewStatCard.style.borderColor = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.2)`;
+      previewTrendBadge.style.backgroundColor = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.15)`;
+      previewTrendBadge.style.color = text;
+
+      // Companion Tokens Generator
+      renderCompanionTokens();
+    }
+
+    // Render Companion Tokens
+    function renderCompanionTokens() {
+      const tokens = generateCompanionTokens(state.text, state.bg1, state.bg2);
+      companionPaletteGrid.innerHTML = '';
+
+      tokens.forEach(tok => {
+        const item = document.createElement('div');
+        item.className = 'group p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-violet-500/60 transition cursor-pointer active:scale-95';
+        item.innerHTML = `
+          <div class="w-full h-7 rounded-lg mb-2 border border-white/10 shadow-inner flex items-center justify-end px-2" style="background-color: ${tok.hex};">
+            <span class="text-[9px] opacity-0 group-hover:opacity-100 transition font-mono font-bold px-1 py-0.5 rounded ${getLuminance(hexToRgb(tok.hex).r, hexToRgb(tok.hex).g, hexToRgb(tok.hex).b) > 0.5 ? 'bg-black/30 text-white' : 'bg-white/40 text-black'}">COPY</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-200 truncate">${tok.label}</div>
+          <div class="text-[10px] text-slate-400 font-mono">${tok.hex}</div>
+        `;
+        item.addEventListener('click', () => {
+          copyTextToClipboard(tok.hex, `${tok.label} 복사 완료`, `${tok.hex} 코드가 복사되었습니다.`);
+        });
+        companionPaletteGrid.appendChild(item);
+      });
+    }
+
+    // Sync input fields with state
+    function syncInputs() {
+      pickerText.value = state.text;
+      hexText.value = state.text.replace('#', '').toUpperCase();
+
+      pickerBg1.value = state.bg1;
+      hexBg1.value = state.bg1.replace('#', '').toUpperCase();
+
+      pickerBg2.value = state.bg2;
+      hexBg2.value = state.bg2.replace('#', '').toUpperCase();
+
+      angleSlider.value = state.angle;
+      angleValue.textContent = `${state.angle}°`;
+    }
+
+    // Handle hex input sanitize & update
+    function handleHexInput(inputEl, stateKey, pickerEl) {
+      let val = inputEl.value.replace('#', '').trim();
+      if (val.length === 6 && /^[0-9A-Fa-f]{6}$/.test(val)) {
+        state[stateKey] = '#' + val.toUpperCase();
+        pickerEl.value = state[stateKey];
+        updateApp();
+      }
+    }
+
+    // --- Preset Buttons Renderer ---
+    function renderPresets() {
+      presetsList.innerHTML = '';
+      PRESETS.forEach(p => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 hover:text-white border border-slate-700 transition flex items-center gap-1.5 active:scale-95';
+        btn.innerHTML = `
+          <span class="w-3 h-3 rounded-full border border-white/20 shadow-sm shrink-0" style="background: linear-gradient(135deg, ${p.bg1}, ${p.bg2});"></span>
+          <span>${p.name}</span>
+        `;
+        btn.addEventListener('click', () => {
+          state.text = p.text;
+          state.bg1 = p.bg1;
+          state.bg2 = p.bg2;
+          state.angle = p.angle;
+          syncInputs();
+          updateApp();
+          showToast('프리셋 적용', `'${p.name}' 배색이 적용되었습니다.`);
+        });
+        presetsList.appendChild(btn);
+      });
+    }
+
+    // --- Event Listeners Initialization ---
+    function initListeners() {
+      // Color pickers
+      pickerText.addEventListener('input', (e) => {
+        state.text = e.target.value.toUpperCase();
+        hexText.value = state.text.replace('#', '');
+        updateApp();
+      });
+
+      hexText.addEventListener('input', () => handleHexInput(hexText, 'text', pickerText));
+
+      pickerBg1.addEventListener('input', (e) => {
+        state.bg1 = e.target.value.toUpperCase();
+        hexBg1.value = state.bg1.replace('#', '');
+        updateApp();
+      });
+
+      hexBg1.addEventListener('input', () => handleHexInput(hexBg1, 'bg1', pickerBg1));
+
+      pickerBg2.addEventListener('input', (e) => {
+        state.bg2 = e.target.value.toUpperCase();
+        hexBg2.value = state.bg2.replace('#', '');
+        updateApp();
+      });
+
+      hexBg2.addEventListener('input', () => handleHexInput(hexBg2, 'bg2', pickerBg2));
+
+      // Angle slider
+      angleSlider.addEventListener('input', (e) => {
+        state.angle = parseInt(e.target.value, 10);
+        angleValue.textContent = `${state.angle}°`;
+        updateApp();
+      });
+
+      // Quick Angle Buttons
+      document.querySelectorAll('.btn-quick-angle').forEach(btn => {
+        btn.addEventListener('click', () => {
+          state.angle = parseInt(btn.dataset.deg, 10);
+          angleSlider.value = state.angle;
+          angleValue.textContent = `${state.angle}°`;
+          updateApp();
+        });
+      });
+
+      // Swap Colors Button
+      document.getElementById('btnSwap').addEventListener('click', () => {
+        const oldText = state.text;
+        state.text = state.bg1;
+        state.bg1 = oldText;
+        // Adjust bg2 slightly to keep harmonious gradient if it was opposite
+        syncInputs();
+        updateApp();
+        showToast('색상 반전 완료', '배경색과 텍스트 색상이 맞바뀌었습니다.');
+      });
+
+      // Auto Fix Button
+      document.getElementById('btnAutoFix').addEventListener('click', () => {
+        const fixedText = autoFixTextColor(state.bg1, state.bg2, state.text);
+        state.text = fixedText;
+        syncInputs();
+        updateApp();
+        showToast('4.5:1 가독성 보정', `글자색이 ${fixedText}(으)로 자동 조정되었습니다.`);
+      });
+
+      // Random Palette Generator
+      document.getElementById('btnRandomize').addEventListener('click', () => {
+        const randomHex = () => '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0').toUpperCase();
+        const b1 = randomHex();
+        const b2 = randomHex();
+        // Give 70% chance to dark background with light text for realistic UI vibes
+        const isDark = Math.random() > 0.3;
+        const textChoice = isDark ? '#FFFFFF' : '#0F172A';
+
+        state.bg1 = b1;
+        state.bg2 = b2;
+        state.text = autoFixTextColor(b1, b2, textChoice);
+        state.angle = [90, 120, 135, 180][Math.floor(Math.random() * 4)];
+
+        syncInputs();
+        updateApp();
+        showToast('랜덤 배색 생성', '새로운 배색 조합이 계산되었습니다.');
+      });
+
+      // Copy CSS Linear Gradient
+      document.getElementById('btnCopyCssGradient').addEventListener('click', () => {
+        const code = `background: linear-gradient(${state.angle}deg, ${state.bg1}, ${state.bg2});\ncolor: ${state.text};`;
+        copyTextToClipboard(code, 'CSS 코드 복사 완료', 'CSS linear-gradient 속성이 복사되었습니다.');
+      });
+
+      // Copy All Hex Codes
+      document.getElementById('btnCopyHexes').addEventListener('click', () => {
+        const code = `/* Text */ ${state.text}\n/* Background Start */ ${state.bg1}\n/* Background End */ ${state.bg2}\n/* Angle */ ${state.angle}deg`;
+        copyTextToClipboard(code, 'HEX 코드 복사 완료', 'HEX 컬러 목록이 복사되었습니다.');
+      });
+    }
+
+    // --- Window Onload Initialization ---
+    window.onload = function () {
+      renderPresets();
+      initListeners();
+      syncInputs();
+      updateApp();
+    };
+  </script>
+</body>
+</html>
+```
