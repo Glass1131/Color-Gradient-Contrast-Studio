@@ -69,26 +69,26 @@
 
   <!-- Header -->
   <header class="border-b border-slate-800/80 bg-slate-900/70 backdrop-blur-md">
-    <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
+    <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-violet-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-violet-500/25">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-violet-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-violet-500/25">
           <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
           </svg>
         </div>
         <div>
-          <h1 class="text-base sm:text-lg font-bold tracking-tight text-white flex items-center gap-2">
+          <h1 class="text-lg sm:text-xl font-bold tracking-tight text-white flex items-center gap-2">
             Gradient & Contrast Studio
-            <span class="text-[10px] font-semibold bg-violet-500/20 text-violet-300 border border-violet-500/30 px-2 py-0.5 rounded-full uppercase tracking-wider">WCAG 2.1 & APCA</span>
+            <span class="text-xs font-semibold bg-violet-500/20 text-violet-300 border border-violet-500/30 px-2.5 py-0.5 rounded-full uppercase tracking-wider">WCAG 2.1 & APCA</span>
           </h1>
-          <p class="text-xs text-slate-400 hidden sm:block">실시간 가독성 검증 & UI 컴포넌트 배색 시뮬레이터</p>
+          <p class="text-sm text-slate-400 hidden sm:block">실시간 가독성 검증 & UI 컴포넌트 배색 시뮬레이터</p>
         </div>
       </div>
 
       <!-- Header Status -->
       <div class="flex items-center space-x-2">
-        <span class="text-xs text-slate-400 font-medium hidden md:inline-flex items-center gap-1.5 px-3 py-1 bg-slate-800/60 rounded-full border border-slate-700/60">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="text-sm text-slate-300 font-medium hidden md:inline-flex items-center gap-2 px-3.5 py-1.5 bg-slate-800/60 rounded-full border border-slate-700/60">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
           실시간 시뮬레이션 활성화
         </span>
       </div>
@@ -96,10 +96,10 @@
   </header>
 
   <!-- Presets Bar -->
-  <div class="bg-slate-900/50 border-b border-slate-800/60 py-2.5 overflow-x-auto">
-    <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 text-xs whitespace-nowrap">
-      <span class="text-slate-400 font-medium mr-1 flex items-center gap-1 shrink-0">
-        <svg class="w-3.5 h-3.5 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <div class="bg-slate-900/50 border-b border-slate-800/60 py-3 overflow-x-auto">
+    <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2.5 text-sm whitespace-nowrap">
+      <span class="text-slate-300 font-semibold mr-1 flex items-center gap-1.5 shrink-0">
+        <svg class="w-4 h-4 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
         </svg>
         실무 프리셋:
@@ -120,20 +120,20 @@
         <!-- 1. Color Picker & Circular Color Wheel Panel -->
         <section class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl backdrop-blur-sm space-y-4">
           <div class="flex flex-wrap items-center justify-between gap-2 pb-2.5 border-b border-slate-800/80">
-            <h2 class="text-sm font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-violet-500"></span>
+            <h2 class="text-base font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-violet-500"></span>
               색상 설정 (Color Wheel Studio)
             </h2>
             <!-- Relocated Quick Action Buttons in Color Studio Toolbar -->
             <div class="flex items-center space-x-1.5">
-              <button id="btnRandomize" title="랜덤 배색 추천" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition border border-slate-700 flex items-center gap-1.5 shadow-sm active:scale-95">
-                <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <button id="btnRandomize" title="랜덤 배색 추천" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-sm font-semibold text-slate-200 transition border border-slate-700 flex items-center gap-1.5 shadow-sm active:scale-95">
+                <svg class="w-4 h-4 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>
                 <span>랜덤 배색</span>
               </button>
-              <button id="btnSwap" title="배경색과 글자색 맞바꾸기" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition border border-slate-700 flex items-center gap-1.5 shadow-sm active:scale-95">
-                <svg class="w-3.5 h-3.5 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <button id="btnSwap" title="배경색과 글자색 맞바꾸기" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-sm font-semibold text-slate-200 transition border border-slate-700 flex items-center gap-1.5 shadow-sm active:scale-95">
+                <svg class="w-4 h-4 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                 </svg>
                 <span>색상 반전</span>
@@ -148,16 +148,16 @@
               <div class="flex items-center gap-3 min-w-0">
                 <div id="textPreviewDot" class="w-9 h-9 rounded-lg border border-white/25 shrink-0 shadow-md" style="background-color: #FFFFFF;"></div>
                 <div class="min-w-0">
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-xs font-bold text-white">텍스트 색상 (Text)</span>
-                    <span class="slot-badge text-[10px] px-1.5 py-0.2 bg-violet-500/30 text-violet-200 rounded font-semibold">조절 중</span>
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm font-bold text-white">텍스트 색상 (Text)</span>
+                    <span class="slot-badge text-xs px-2 py-0.5 bg-violet-500/30 text-violet-200 rounded font-semibold">조절 중</span>
                   </div>
-                  <span id="textLuminanceBadge" class="text-[11px] text-slate-400 font-mono block">휘도: 1.00</span>
+                  <span id="textLuminanceBadge" class="text-xs text-slate-300 font-mono font-medium block mt-0.5">휘도: 1.00</span>
                 </div>
               </div>
-              <div class="relative w-28 shrink-0" onclick="event.stopPropagation()">
-                <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-mono font-bold">#</span>
-                <input type="text" id="hexText" value="FFFFFF" maxlength="7" class="w-full bg-slate-900 border border-slate-700/80 rounded-lg pl-6 pr-2 py-1.5 text-xs font-mono text-slate-100 uppercase focus:outline-none focus:border-violet-500">
+              <div class="relative w-32 shrink-0" onclick="event.stopPropagation()">
+                <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-mono font-bold">#</span>
+                <input type="text" id="hexText" value="FFFFFF" maxlength="7" class="w-full bg-slate-900 border border-slate-700/80 rounded-lg pl-7 pr-2.5 py-2 text-sm font-mono font-bold text-slate-100 uppercase focus:outline-none focus:border-violet-500">
               </div>
             </div>
 
@@ -166,16 +166,16 @@
               <div class="flex items-center gap-3 min-w-0">
                 <div id="bg1PreviewDot" class="w-9 h-9 rounded-lg border border-white/25 shrink-0 shadow-md" style="background-color: #1E1B4B;"></div>
                 <div class="min-w-0">
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-xs font-bold text-white">배경 시작 색상 (Start)</span>
-                    <span class="slot-badge hidden text-[10px] px-1.5 py-0.2 bg-violet-500/30 text-violet-200 rounded font-semibold">조절 중</span>
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm font-bold text-white">배경 시작 색상 (Start)</span>
+                    <span class="slot-badge hidden text-xs px-2 py-0.5 bg-violet-500/30 text-violet-200 rounded font-semibold">조절 중</span>
                   </div>
-                  <span id="bg1LuminanceBadge" class="text-[11px] text-slate-400 font-mono block">휘도: 0.01</span>
+                  <span id="bg1LuminanceBadge" class="text-xs text-slate-300 font-mono font-medium block mt-0.5">휘도: 0.01</span>
                 </div>
               </div>
-              <div class="relative w-28 shrink-0" onclick="event.stopPropagation()">
-                <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-mono font-bold">#</span>
-                <input type="text" id="hexBg1" value="1E1B4B" maxlength="7" class="w-full bg-slate-900 border border-slate-700/80 rounded-lg pl-6 pr-2 py-1.5 text-xs font-mono text-slate-100 uppercase focus:outline-none focus:border-violet-500">
+              <div class="relative w-32 shrink-0" onclick="event.stopPropagation()">
+                <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-mono font-bold">#</span>
+                <input type="text" id="hexBg1" value="1E1B4B" maxlength="7" class="w-full bg-slate-900 border border-slate-700/80 rounded-lg pl-7 pr-2.5 py-2 text-sm font-mono font-bold text-slate-100 uppercase focus:outline-none focus:border-violet-500">
               </div>
             </div>
 
@@ -184,16 +184,16 @@
               <div class="flex items-center gap-3 min-w-0">
                 <div id="bg2PreviewDot" class="w-9 h-9 rounded-lg border border-white/25 shrink-0 shadow-md" style="background-color: #4338CA;"></div>
                 <div class="min-w-0">
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-xs font-bold text-white">배경 끝 색상 (End)</span>
-                    <span class="slot-badge hidden text-[10px] px-1.5 py-0.2 bg-violet-500/30 text-violet-200 rounded font-semibold">조절 중</span>
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm font-bold text-white">배경 끝 색상 (End)</span>
+                    <span class="slot-badge hidden text-xs px-2 py-0.5 bg-violet-500/30 text-violet-200 rounded font-semibold">조절 중</span>
                   </div>
-                  <span id="bg2LuminanceBadge" class="text-[11px] text-slate-400 font-mono block">휘도: 0.05</span>
+                  <span id="bg2LuminanceBadge" class="text-xs text-slate-300 font-mono font-medium block mt-0.5">휘도: 0.05</span>
                 </div>
               </div>
-              <div class="relative w-28 shrink-0" onclick="event.stopPropagation()">
-                <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-mono font-bold">#</span>
-                <input type="text" id="hexBg2" value="4338CA" maxlength="7" class="w-full bg-slate-900 border border-slate-700/80 rounded-lg pl-6 pr-2 py-1.5 text-xs font-mono text-slate-100 uppercase focus:outline-none focus:border-violet-500">
+              <div class="relative w-32 shrink-0" onclick="event.stopPropagation()">
+                <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-mono font-bold">#</span>
+                <input type="text" id="hexBg2" value="4338CA" maxlength="7" class="w-full bg-slate-900 border border-slate-700/80 rounded-lg pl-7 pr-2.5 py-2 text-sm font-mono font-bold text-slate-100 uppercase focus:outline-none focus:border-violet-500">
               </div>
             </div>
           </div>
@@ -203,9 +203,9 @@
             <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-800/80">
               <div class="flex items-center gap-2">
                 <span id="activeWheelSwatch" class="w-4 h-4 rounded-full border border-white/30 shadow-sm" style="background-color: #FFFFFF;"></span>
-                <span id="activeWheelTitle" class="text-xs font-bold text-slate-200">색상환 팔레트 — 텍스트 색상</span>
+                <span id="activeWheelTitle" class="text-sm font-bold text-slate-200">색상환 팔레트 — 텍스트 색상</span>
               </div>
-              <button type="button" id="btnSyncSolidBg" class="text-[11px] px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition" title="시작색과 끝색을 동일하게 맞춰 단색 배경으로 만듭니다">
+              <button type="button" id="btnSyncSolidBg" class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition" title="시작색과 끝색을 동일하게 맞춰 단색 배경으로 만듭니다">
                 단색 배경 맞추기
               </button>
             </div>
@@ -221,12 +221,12 @@
 
               <!-- Vertical Brightness (Value) Slider -->
               <div class="flex flex-col items-center gap-1.5">
-                <span class="text-[10px] text-slate-400 font-mono">명도</span>
+                <span class="text-xs text-slate-300 font-semibold">명도</span>
                 <div id="valueSliderTrack" class="relative w-6 h-[180px] rounded-full border border-white/20 cursor-ns-resize wheel-interactive shadow-inner" style="background: linear-gradient(to bottom, #ffffff 0%, #000000 100%);">
                   <!-- Slider Handle -->
                   <div id="valueSliderThumb" class="pointer-events-none absolute left-1/2 -translate-x-1/2 -mt-2 w-7 h-4 rounded-md bg-white border-2 border-slate-900 shadow-md" style="top: 0%;"></div>
                 </div>
-                <span id="valuePercentLabel" class="text-[10px] text-slate-400 font-mono">100%</span>
+                <span id="valuePercentLabel" class="text-xs text-slate-300 font-mono font-bold">100%</span>
               </div>
             </div>
 
@@ -240,16 +240,16 @@
 
           <!-- Gradient Angle Controller -->
           <div class="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800">
-            <div class="flex items-center justify-between text-xs font-bold text-slate-200 mb-2">
+            <div class="flex items-center justify-between text-sm font-bold text-slate-200 mb-2">
               <span>그라데이션 각도 (Angle)</span>
-              <span id="angleValue" class="text-violet-400 font-mono">135°</span>
+              <span id="angleValue" class="text-violet-400 font-mono font-bold text-base">135°</span>
             </div>
             <div class="flex items-center gap-3">
-              <input type="range" id="angleSlider" min="0" max="360" value="135" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-violet-500">
-              <div class="flex gap-1 shrink-0">
-                <button type="button" class="btn-quick-angle px-2 py-1 text-[11px] bg-slate-800 hover:bg-slate-700 rounded text-slate-300 font-mono active:scale-95" data-deg="90">90°</button>
-                <button type="button" class="btn-quick-angle px-2 py-1 text-[11px] bg-slate-800 hover:bg-slate-700 rounded text-slate-300 font-mono active:scale-95" data-deg="135">135°</button>
-                <button type="button" class="btn-quick-angle px-2 py-1 text-[11px] bg-slate-800 hover:bg-slate-700 rounded text-slate-300 font-mono active:scale-95" data-deg="180">180°</button>
+              <input type="range" id="angleSlider" min="0" max="360" value="135" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-violet-500">
+              <div class="flex gap-1.5 shrink-0">
+                <button type="button" class="btn-quick-angle px-2.5 py-1 text-xs bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 font-mono font-semibold active:scale-95" data-deg="90">90°</button>
+                <button type="button" class="btn-quick-angle px-2.5 py-1 text-xs bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 font-mono font-semibold active:scale-95" data-deg="135">135°</button>
+                <button type="button" class="btn-quick-angle px-2.5 py-1 text-xs bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 font-mono font-semibold active:scale-95" data-deg="180">180°</button>
               </div>
             </div>
           </div>
@@ -258,12 +258,12 @@
         <!-- 2. WCAG Contrast & APCA Score Card -->
         <section class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl backdrop-blur-sm">
           <div class="flex items-center justify-between mb-3">
-            <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300">
+            <h2 class="text-base font-bold uppercase tracking-wider text-slate-200">
               가독성 평가 (WCAG & APCA)
             </h2>
             <!-- Auto Fix Button -->
-            <button id="btnAutoFix" class="px-2.5 py-1 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-semibold transition flex items-center gap-1 active:scale-95 shadow-sm">
-              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <button id="btnAutoFix" class="px-3 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-sm font-semibold transition flex items-center gap-1.5 active:scale-95 shadow-sm">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
               <span>4.5:1 자동 보정</span>
@@ -273,56 +273,56 @@
           <!-- Dual Standard Score Cards: WCAG 2.1 & APCA -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
             <!-- WCAG 2.1 Ratio Card -->
-            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 flex flex-col justify-between">
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex flex-col justify-between">
               <div>
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-[11px] text-slate-400 font-medium">WCAG 2.1 명암비</span>
-                  <span id="contrastVerdictBadge" class="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-slate-800 text-slate-300">계산 중</span>
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="text-xs text-slate-300 font-semibold">WCAG 2.1 명암비</span>
+                  <span id="contrastVerdictBadge" class="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-800 text-slate-300">계산 중</span>
                 </div>
                 <div class="flex items-baseline gap-1.5 mt-1">
-                  <span id="worstContrastScore" class="text-3xl font-black tracking-tight text-white font-mono">-- : 1</span>
+                  <span id="worstContrastScore" class="text-3xl sm:text-4xl font-black tracking-tight text-white font-mono">-- : 1</span>
                 </div>
               </div>
-              <p class="text-[10px] text-slate-500 mt-2">일반 본문 4.5:1 / 헤딩 3.0:1</p>
+              <p class="text-xs text-slate-400 font-medium mt-2.5">일반 본문 4.5:1 / 헤딩 3.0:1</p>
             </div>
 
             <!-- APCA Perceptual Contrast Card -->
-            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 flex flex-col justify-between">
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex flex-col justify-between">
               <div>
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-[11px] text-slate-400 font-medium flex items-center gap-1">
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="text-xs text-slate-300 font-semibold flex items-center gap-1.5">
                     APCA 지각 명암비
-                    <span class="text-[9px] px-1 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 rounded font-mono">차세대</span>
+                    <span class="text-[10px] font-bold px-1.5 py-0.5 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 rounded font-mono">차세대</span>
                   </span>
-                  <span id="apcaVerdictBadge" class="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-slate-800 text-slate-300">계산 중</span>
+                  <span id="apcaVerdictBadge" class="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-800 text-slate-300">계산 중</span>
                 </div>
                 <div class="flex items-baseline gap-1.5 mt-1">
-                  <span id="apcaScoreVal" class="text-3xl font-black tracking-tight text-indigo-300 font-mono">Lc --</span>
+                  <span id="apcaScoreVal" class="text-3xl sm:text-4xl font-black tracking-tight text-indigo-300 font-mono">Lc --</span>
                 </div>
               </div>
-              <p id="apcaGuidelineNote" class="text-[10px] text-slate-500 mt-2">인간 망막 인지 모델 ($L^c$ 점수)</p>
+              <p id="apcaGuidelineNote" class="text-xs text-slate-400 font-medium mt-2.5 leading-snug">인간 망막 인지 모델 ($L^c$ 점수)</p>
             </div>
           </div>
 
           <!-- Dual Side Comparison Breakdown -->
-          <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 mb-4">
-            <p id="worstConditionNote" class="text-[11px] text-slate-400 mb-2.5">
+          <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 mb-4">
+            <p id="worstConditionNote" class="text-xs text-slate-300 font-medium mb-2.5">
               그라데이션 양 끝 중 글자가 더 읽기 어려운 쪽을 기준으로 엄격하게 판정합니다.
             </p>
-            <div class="grid grid-cols-2 gap-2 text-xs">
-              <div class="bg-slate-900/60 p-2 rounded-lg flex items-center justify-between">
-                <span class="text-slate-400 flex items-center gap-1.5">
+            <div class="grid grid-cols-2 gap-2.5 text-sm">
+              <div class="bg-slate-900/60 p-2.5 rounded-lg flex items-center justify-between">
+                <span class="text-slate-300 font-medium flex items-center gap-1.5 text-xs">
                   <span id="dotBg1" class="w-2.5 h-2.5 rounded-full border border-white/20"></span>
                   시작색:
                 </span>
-                <span id="scoreBg1" class="font-mono font-bold text-slate-200">--:1</span>
+                <span id="scoreBg1" class="font-mono font-bold text-slate-100 text-sm">--:1</span>
               </div>
-              <div class="bg-slate-900/60 p-2 rounded-lg flex items-center justify-between">
-                <span class="text-slate-400 flex items-center gap-1.5">
+              <div class="bg-slate-900/60 p-2.5 rounded-lg flex items-center justify-between">
+                <span class="text-slate-300 font-medium flex items-center gap-1.5 text-xs">
                   <span id="dotBg2" class="w-2.5 h-2.5 rounded-full border border-white/20"></span>
                   끝색:
                 </span>
-                <span id="scoreBg2" class="font-mono font-bold text-slate-200">--:1</span>
+                <span id="scoreBg2" class="font-mono font-bold text-slate-100 text-sm">--:1</span>
               </div>
             </div>
           </div>
@@ -335,20 +335,20 @@
           <!-- Badges Table -->
           <div class="grid grid-cols-2 gap-3 text-center">
             <!-- Normal Text -->
-            <div class="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
-              <span class="text-xs font-medium text-slate-400 block mb-1">일반 본문 (Normal Text)</span>
+            <div class="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800">
+              <span class="text-sm font-semibold text-slate-300 block mb-1.5">일반 본문 (Normal Text)</span>
               <div class="flex items-center justify-center gap-2 mt-2">
-                <span id="badgeNormalAA" class="px-2 py-0.5 text-xs font-bold rounded border">AA (4.5)</span>
-                <span id="badgeNormalAAA" class="px-2 py-0.5 text-xs font-bold rounded border">AAA (7.0)</span>
+                <span id="badgeNormalAA" class="px-2.5 py-1 text-xs font-bold rounded-lg border">AA (4.5)</span>
+                <span id="badgeNormalAAA" class="px-2.5 py-1 text-xs font-bold rounded-lg border">AAA (7.0)</span>
               </div>
             </div>
 
             <!-- Large Text -->
-            <div class="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
-              <span class="text-xs font-medium text-slate-400 block mb-1">큰 글자 / 헤딩 (Large Text)</span>
+            <div class="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800">
+              <span class="text-sm font-semibold text-slate-300 block mb-1.5">큰 글자 / 헤딩 (Large Text)</span>
               <div class="flex items-center justify-center gap-2 mt-2">
-                <span id="badgeLargeAA" class="px-2 py-0.5 text-xs font-bold rounded border">AA (3.0)</span>
-                <span id="badgeLargeAAA" class="px-2 py-0.5 text-xs font-bold rounded border">AAA (4.5)</span>
+                <span id="badgeLargeAA" class="px-2.5 py-1 text-xs font-bold rounded-lg border">AA (3.0)</span>
+                <span id="badgeLargeAAA" class="px-2.5 py-1 text-xs font-bold rounded-lg border">AAA (4.5)</span>
               </div>
             </div>
           </div>
@@ -356,7 +356,7 @@
 
         <!-- 3. Practical UI Sub-colors (실무 보조 색상 추천) -->
         <section class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl backdrop-blur-sm">
-          <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-1">
+          <h2 class="text-base font-bold uppercase tracking-wider text-slate-200 mb-1">
             실무 보조 색상 (UI Companion Tokens)
           </h2>
           <p class="text-xs text-slate-400 mb-3">클릭하면 HEX 코드가 클립보드로 복사됩니다.</p>
@@ -368,28 +368,28 @@
 
         <!-- 4. Quick Code Export -->
         <section class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl backdrop-blur-sm">
-          <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-3">
+          <h2 class="text-base font-bold uppercase tracking-wider text-slate-200 mb-3">
             원클릭 코드 복사 (Quick Export)
           </h2>
-          <div class="space-y-2">
-            <button id="btnCopyCssGradient" class="w-full py-2.5 px-4 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-200 text-xs font-medium rounded-xl border border-slate-700/80 transition flex items-center justify-between group">
+          <div class="space-y-2.5">
+            <button id="btnCopyCssGradient" class="w-full py-3 px-4 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-200 text-sm font-semibold rounded-xl border border-slate-700/80 transition flex items-center justify-between group">
               <span class="flex items-center gap-2">
                 <svg class="w-4 h-4 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
                 <span>CSS 그라데이션 코드 복사</span>
               </span>
-              <span class="text-[10px] text-slate-400 group-hover:text-slate-200 font-mono">background: linear-gradient...</span>
+              <span class="text-xs text-slate-400 group-hover:text-slate-200 font-mono">background: linear-gradient...</span>
             </button>
 
-            <button id="btnCopyHexes" class="w-full py-2.5 px-4 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-200 text-xs font-medium rounded-xl border border-slate-700/80 transition flex items-center justify-between group">
+            <button id="btnCopyHexes" class="w-full py-3 px-4 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-200 text-sm font-semibold rounded-xl border border-slate-700/80 transition flex items-center justify-between group">
               <span class="flex items-center gap-2">
                 <svg class="w-4 h-4 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
                 <span>HEX 코드 모음 복사</span>
               </span>
-              <span class="text-[10px] text-slate-400 group-hover:text-slate-200 font-mono">Text / Start / End</span>
+              <span class="text-xs text-slate-400 group-hover:text-slate-200 font-mono">Text / Start / End</span>
             </button>
           </div>
         </section>
@@ -401,36 +401,36 @@
 
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h2 class="text-lg font-bold text-white tracking-tight flex items-center gap-2">
+            <h2 class="text-xl font-bold text-white tracking-tight flex items-center gap-2">
               실시간 UI 시뮬레이터
-              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
             </h2>
-            <p class="text-xs text-slate-400">선택한 배색이 실제 화면과 인터랙션 효과에 어떻게 렌더링되는지 확인합니다.</p>
+            <p class="text-sm text-slate-400">선택한 배색이 실제 화면과 인터랙션 효과에 어떻게 렌더링되는지 확인합니다.</p>
           </div>
 
           <!-- View Mode Tab Switcher & Compensation Toggle -->
           <div class="flex flex-wrap items-center gap-2">
             <!-- Modern Tab Switcher Pill -->
             <div class="inline-flex p-1 bg-slate-900 border border-slate-700/80 rounded-xl shadow-inner">
-              <button type="button" id="tabBtnUI" class="px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-violet-600 text-white shadow-sm">
+              <button type="button" id="tabBtnUI" class="px-3.5 py-2 rounded-lg text-sm font-bold transition flex items-center gap-1.5 bg-violet-600 text-white shadow-sm">
                 <span>📱 기본 컴포넌트</span>
               </button>
-              <button type="button" id="tabBtnFX" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 text-slate-400 hover:text-slate-200">
+              <button type="button" id="tabBtnFX" class="px-3.5 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-1.5 text-slate-400 hover:text-slate-200">
                 <span>✨ 모던 FX & 모션</span>
                 <span class="w-1.5 h-1.5 rounded-full bg-violet-400"></span>
               </button>
             </div>
 
             <!-- Dark Mode Optical Font Weight Compensation Toggle -->
-            <label class="flex items-center gap-2 bg-slate-900 border border-slate-700/80 px-2.5 py-1.5 rounded-xl cursor-pointer hover:border-violet-500/50 transition select-none" title="어두운 배경에서 글자가 빛 번짐(Halation)으로 굵어 보이는 현상을 상쇄하기 위해 폰트 굵기를 반 단계 자동 완화합니다">
-              <input type="checkbox" id="toggleWeightComp" class="w-3.5 h-3.5 rounded text-violet-600 focus:ring-0 bg-slate-800 border-slate-600 cursor-pointer" checked>
-              <span class="text-[11px] font-medium text-slate-300 flex items-center gap-1.5">
+            <label class="flex items-center gap-2 bg-slate-900 border border-slate-700/80 px-3 py-2 rounded-xl cursor-pointer hover:border-violet-500/50 transition select-none" title="어두운 배경에서 글자가 빛 번짐(Halation)으로 굵어 보이는 현상을 상쇄하기 위해 폰트 굵기를 반 단계 자동 완화합니다">
+              <input type="checkbox" id="toggleWeightComp" class="w-4 h-4 rounded text-violet-600 focus:ring-0 bg-slate-800 border-slate-600 cursor-pointer" checked>
+              <span class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
                 <span>폰트 굵기 보정</span>
-                <span id="badgeWeightCompActive" class="text-[9px] px-1 py-0.2 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded font-mono hidden">적용됨</span>
+                <span id="badgeWeightCompActive" class="text-[10px] px-1.5 py-0.2 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded font-mono hidden">적용됨</span>
               </span>
             </label>
 
-            <span id="liveBgBadge" class="text-[11px] font-mono bg-slate-900 border border-slate-700 text-violet-300 px-2.5 py-1.5 rounded-xl">
+            <span id="liveBgBadge" class="text-xs font-mono font-medium bg-slate-900 border border-slate-700 text-violet-300 px-3 py-2 rounded-xl">
               BG: #1E1B4B → #4338CA
             </span>
           </div>
@@ -1246,9 +1246,9 @@
 
     function setBadgeStatus(el, passed) {
       if (passed) {
-        el.className = "px-2 py-0.5 text-xs font-bold rounded border bg-emerald-500/20 text-emerald-300 border-emerald-500/40";
+        el.className = "px-2.5 py-1 text-xs font-bold rounded-lg border bg-emerald-500/20 text-emerald-300 border-emerald-500/40";
       } else {
-        el.className = "px-2 py-0.5 text-xs font-bold rounded border bg-rose-500/10 text-rose-400 border-rose-500/20 line-through opacity-75";
+        el.className = "px-2.5 py-1 text-xs font-bold rounded-lg border bg-rose-500/10 text-rose-400 border-rose-500/20 line-through opacity-75";
       }
     }
 
@@ -1299,23 +1299,23 @@
 
       if (absWorstApca >= 90) {
         apcaVerdictBadge.textContent = '장문 본문 최적 (Lc 90+)';
-        apcaVerdictBadge.className = 'text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+        apcaVerdictBadge.className = 'text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
         apcaGuidelineNote.textContent = '작은 폰트(14px) 및 얇은 글씨도 선명하게 판독 가능';
       } else if (absWorstApca >= 75) {
         apcaVerdictBadge.textContent = '일반 본문 권장 (Lc 75+)';
-        apcaVerdictBadge.className = 'text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+        apcaVerdictBadge.className = 'text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
         apcaGuidelineNote.textContent = '웹 본문 16px Regular(400) 가독성 완벽 통과';
       } else if (absWorstApca >= 60) {
         apcaVerdictBadge.textContent = '24px/볼드 통과 (Lc 60+)';
-        apcaVerdictBadge.className = 'text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30';
+        apcaVerdictBadge.className = 'text-xs font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30';
         apcaGuidelineNote.textContent = '16px 볼드(700) 또는 24px 이상 중간 헤딩 권장';
       } else if (absWorstApca >= 45) {
         apcaVerdictBadge.textContent = '대형 헤딩만 허용 (Lc 45+)';
-        apcaVerdictBadge.className = 'text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30';
+        apcaVerdictBadge.className = 'text-xs font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30';
         apcaGuidelineNote.textContent = '36px 이상 대형 굵은 폰트에만 제한적으로 사용';
       } else {
         apcaVerdictBadge.textContent = '지각 대비 탈락 (Lc < 45)';
-        apcaVerdictBadge.className = 'text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30';
+        apcaVerdictBadge.className = 'text-xs font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30';
         apcaGuidelineNote.textContent = '텍스트 판독 불가 수준 (장식 요소 전용)';
       }
 
@@ -1324,14 +1324,14 @@
       if (warnings.length > 0) {
         perceptualWarningsBox.classList.remove('hidden');
         perceptualWarningsBox.innerHTML = warnings.map(w => `
-          <div class="p-3 rounded-xl border ${w.type === 'halation' ? 'bg-amber-500/10 border-amber-500/30 text-amber-200' : 'bg-rose-500/10 border-rose-500/30 text-rose-200'} text-xs">
-            <div class="font-bold flex items-center gap-1.5 mb-1">
+          <div class="p-3.5 rounded-xl border ${w.type === 'halation' ? 'bg-amber-500/10 border-amber-500/30 text-amber-200' : 'bg-rose-500/10 border-rose-500/30 text-rose-200'} text-xs">
+            <div class="font-bold flex items-center gap-1.5 mb-1.5 text-sm">
               <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
               </svg>
               <span>${w.title}</span>
             </div>
-            <p class="text-[11px] opacity-90 leading-relaxed">${w.desc}</p>
+            <p class="text-xs opacity-90 leading-relaxed">${w.desc}</p>
           </div>
         `).join('');
       } else {
@@ -1357,16 +1357,16 @@
 
       if (passNormalAAA) {
         contrastVerdictBadge.textContent = '최우수 (AAA 등급)';
-        contrastVerdictBadge.className = 'text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40';
+        contrastVerdictBadge.className = 'text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40';
       } else if (passNormalAA) {
         contrastVerdictBadge.textContent = '적합 (AA 등급)';
-        contrastVerdictBadge.className = 'text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
+        contrastVerdictBadge.className = 'text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
       } else if (passLargeAA) {
         contrastVerdictBadge.textContent = '헤딩 전용 (대형 텍스트만 통과)';
-        contrastVerdictBadge.className = 'text-xs font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40';
+        contrastVerdictBadge.className = 'text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40';
       } else {
         contrastVerdictBadge.textContent = '가독성 부족 (탈락)';
-        contrastVerdictBadge.className = 'text-xs font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/40';
+        contrastVerdictBadge.className = 'text-xs font-bold px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/40';
       }
 
       // --- UNIFIED LIVE PREVIEW CONTAINER BACKGROUND ---
@@ -1524,11 +1524,11 @@
         const item = document.createElement('div');
         item.className = 'group p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-violet-500/60 transition cursor-pointer active:scale-95';
         item.innerHTML = `
-          <div class="w-full h-7 rounded-lg mb-2 border border-white/10 shadow-inner flex items-center justify-end px-2" style="background-color: ${tok.hex};">
-            <span class="text-[9px] opacity-0 group-hover:opacity-100 transition font-mono font-bold px-1 py-0.5 rounded ${getLuminance(hexToRgb(tok.hex).r, hexToRgb(tok.hex).g, hexToRgb(tok.hex).b) > 0.5 ? 'bg-black/40 text-white' : 'bg-white/50 text-black'}">COPY</span>
+          <div class="w-full h-8 rounded-lg mb-2 border border-white/10 shadow-inner flex items-center justify-end px-2" style="background-color: ${tok.hex};">
+            <span class="text-[10px] opacity-0 group-hover:opacity-100 transition font-mono font-bold px-1.5 py-0.5 rounded ${getLuminance(hexToRgb(tok.hex).r, hexToRgb(tok.hex).g, hexToRgb(tok.hex).b) > 0.5 ? 'bg-black/50 text-white' : 'bg-white/60 text-black'}">COPY</span>
           </div>
-          <div class="text-[11px] font-semibold text-slate-200 truncate">${tok.label}</div>
-          <div class="text-[10px] text-slate-400 font-mono">${tok.hex}</div>
+          <div class="text-xs font-bold text-slate-200 truncate">${tok.label}</div>
+          <div class="text-xs text-slate-400 font-mono mt-0.5">${tok.hex}</div>
         `;
         item.addEventListener('click', () => {
           copyTextToClipboard(tok.hex, `${tok.label} 복사 완료`, `${tok.hex} 코드가 복사되었습니다.`);
@@ -1560,9 +1560,9 @@
       PRESETS.forEach(p => {
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = 'px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition flex items-center gap-1.5 active:scale-95';
+        btn.className = 'px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-sm text-slate-300 hover:text-white border border-slate-700 transition flex items-center gap-2 active:scale-95';
         btn.innerHTML = `
-          <span class="w-3 h-3 rounded-full border border-white/20 shadow-sm shrink-0" style="background: linear-gradient(135deg, ${p.bg1}, ${p.bg2});"></span>
+          <span class="w-3.5 h-3.5 rounded-full border border-white/20 shadow-sm shrink-0" style="background: linear-gradient(135deg, ${p.bg1}, ${p.bg2});"></span>
           <span>${p.name}</span>
         `;
         btn.addEventListener('click', () => {
@@ -1672,13 +1672,13 @@
     function setPreviewTab(tabKey) {
       state.activeTab = tabKey;
       if (tabKey === 'ui') {
-        tabBtnUI.className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-violet-600 text-white shadow-sm';
-        tabBtnFX.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 text-slate-400 hover:text-slate-200';
+        tabBtnUI.className = 'px-3.5 py-2 rounded-lg text-sm font-bold transition flex items-center gap-1.5 bg-violet-600 text-white shadow-sm';
+        tabBtnFX.className = 'px-3.5 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-1.5 text-slate-400 hover:text-slate-200';
         tabContentUI.classList.remove('hidden');
         tabContentFX.classList.add('hidden');
       } else {
-        tabBtnFX.className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-violet-600 text-white shadow-sm';
-        tabBtnUI.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 text-slate-400 hover:text-slate-200';
+        tabBtnFX.className = 'px-3.5 py-2 rounded-lg text-sm font-bold transition flex items-center gap-1.5 bg-violet-600 text-white shadow-sm';
+        tabBtnUI.className = 'px-3.5 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-1.5 text-slate-400 hover:text-slate-200';
         tabContentFX.classList.remove('hidden');
         tabContentUI.classList.add('hidden');
       }
