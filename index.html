@@ -43,7 +43,7 @@
 
   <!-- Header -->
   <header class="border-b border-slate-800/80 bg-slate-900/70 backdrop-blur-md sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+    <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
       <div class="flex items-center space-x-3">
         <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-violet-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-violet-500/25">
           <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -59,27 +59,19 @@
         </div>
       </div>
 
-      <!-- Quick Action Buttons -->
+      <!-- Header Status -->
       <div class="flex items-center space-x-2">
-        <button id="btnRandomize" title="랜덤 배색 추천" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 transition border border-slate-700 flex items-center gap-1.5 shadow-sm active:scale-95">
-          <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-          </svg>
-          <span class="hidden sm:inline">랜덤 배색</span>
-        </button>
-        <button id="btnSwap" title="배경색과 글자색 맞바꾸기" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 transition border border-slate-700 flex items-center gap-1.5 shadow-sm active:scale-95">
-          <svg class="w-3.5 h-3.5 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-          </svg>
-          <span>색상 반전</span>
-        </button>
+        <span class="text-xs text-slate-400 font-medium hidden md:inline-flex items-center gap-1.5 px-3 py-1 bg-slate-800/60 rounded-full border border-slate-700/60">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          실시간 시뮬레이션 활성화
+        </span>
       </div>
     </div>
   </header>
 
   <!-- Presets Bar -->
   <div class="bg-slate-900/50 border-b border-slate-800/60 py-2.5 overflow-x-auto">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 text-xs whitespace-nowrap">
+    <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 text-xs whitespace-nowrap">
       <span class="text-slate-400 font-medium mr-1 flex items-center gap-1 shrink-0">
         <svg class="w-3.5 h-3.5 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
@@ -93,7 +85,7 @@
   </div>
 
   <!-- Main Container -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+  <main class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
       <!-- LEFT COLUMN: Color Controls, Palettes, WCAG Scores (5 Cols) -->
@@ -101,12 +93,26 @@
 
         <!-- 1. Color Picker & Circular Color Wheel Panel -->
         <section class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl backdrop-blur-sm space-y-4">
-          <div class="flex items-center justify-between">
-            <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+          <div class="flex flex-wrap items-center justify-between gap-2 pb-2.5 border-b border-slate-800/80">
+            <h2 class="text-sm font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-violet-500"></span>
               색상 설정 (Color Wheel Studio)
             </h2>
-            <span class="text-[11px] text-violet-300 font-medium">항목 선택 후 아래 색상환 조작</span>
+            <!-- Relocated Quick Action Buttons in Color Studio Toolbar -->
+            <div class="flex items-center space-x-1.5">
+              <button id="btnRandomize" title="랜덤 배색 추천" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition border border-slate-700 flex items-center gap-1.5 shadow-sm active:scale-95">
+                <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                <span>랜덤 배색</span>
+              </button>
+              <button id="btnSwap" title="배경색과 글자색 맞바꾸기" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition border border-slate-700 flex items-center gap-1.5 shadow-sm active:scale-95">
+                <svg class="w-3.5 h-3.5 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                </svg>
+                <span>색상 반전</span>
+              </button>
+            </div>
           </div>
 
           <!-- 3 Selectable Color Slots (Text / Start BG / End BG) -->
@@ -395,26 +401,26 @@
         <div id="previewCanvasWrapper" class="preview-dynamic p-6 sm:p-8 rounded-3xl border-2 transition-all duration-150 space-y-6 shadow-2xl relative overflow-hidden">
 
           <!-- 1. Hero Feature / Card UI -->
-          <div id="previewHeroCard" class="preview-dynamic rounded-2xl p-6 sm:p-7 border backdrop-blur-sm transition-all duration-150 relative overflow-hidden">
-            <div class="max-w-md">
-              <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full text-xs font-medium mb-4 border" id="previewBadge">
-                <span class="w-1.5 h-1.5 rounded-full bg-current opacity-80"></span>
+          <div id="previewHeroCard" class="preview-dynamic rounded-2xl p-6 sm:p-8 border transition-all duration-150 relative overflow-hidden">
+            <div class="max-w-xl">
+              <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-5 border" id="previewBadge">
+                <span class="w-2 h-2 rounded-full bg-current opacity-90 animate-pulse"></span>
                 <span>2026 차세대 디자인 시스템</span>
               </div>
-              <h3 id="previewHeroTitle" class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2 leading-tight">
+              <h3 id="previewHeroTitle" class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-3 leading-tight">
                 완벽한 가독성과 심미성을 갖춘 UI 배색
               </h3>
-              <p id="previewHeroDesc" class="text-sm sm:text-base opacity-90 mb-6 leading-relaxed font-normal">
+              <p id="previewHeroDesc" class="text-base sm:text-lg opacity-90 mb-7 leading-relaxed font-normal">
                 배경과 글자 사이의 명암비를 실시간으로 점검하고, 사용자가 어떤 환경에서도 편안하게 읽을 수 있는 인터페이스를 완성하세요.
               </p>
-              <div class="flex flex-wrap items-center gap-3">
-                <button id="previewBtnPrimary" class="px-5 py-2.5 rounded-xl text-xs font-bold shadow-lg transition active:scale-95 flex items-center gap-2">
+              <div class="flex flex-wrap items-center gap-3.5">
+                <button id="previewBtnPrimary" class="px-6 py-3.5 rounded-xl text-sm font-bold shadow-xl transition active:scale-95 flex items-center gap-2.5">
                   <span>프로젝트 시작하기</span>
-                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
                 </button>
-                <button id="previewBtnSecondary" class="px-4 py-2.5 rounded-xl text-xs font-medium transition active:scale-95 border">
+                <button id="previewBtnSecondary" class="px-5 py-3.5 rounded-xl text-sm font-semibold transition active:scale-95 border">
                   문서 확인
                 </button>
               </div>
@@ -422,36 +428,36 @@
           </div>
 
           <!-- 2. Typography Scale Check (Headings & Body) -->
-          <div id="previewTypoOuter" class="preview-dynamic rounded-2xl p-6 border backdrop-blur-sm transition-all duration-150">
-            <div id="previewTypoHeader" class="flex items-center justify-between border-b pb-3 mb-4">
+          <div id="previewTypoOuter" class="preview-dynamic rounded-2xl p-6 sm:p-8 border transition-all duration-150">
+            <div id="previewTypoHeader" class="flex items-center justify-between border-b pb-3.5 mb-5">
               <h3 class="text-xs font-bold uppercase tracking-wider opacity-85">타이포그래피 가독성 테스트 (Typography Scale)</h3>
-              <span class="text-[11px] opacity-75">크기별 가독성 차이 체감</span>
+              <span class="text-xs opacity-75 font-mono">크기별 가독성 체감</span>
             </div>
 
-            <div id="previewTypoContainer" class="space-y-4">
+            <div id="previewTypoContainer" class="space-y-5">
               <div>
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-[11px] opacity-75 font-mono">Heading 1 (28px Bold) — 대형 텍스트 (3.0:1 이상)</span>
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="text-xs opacity-75 font-mono font-medium">Heading 1 (30px Bold) — 대형 텍스트 (3.0:1 이상)</span>
                 </div>
-                <h1 id="previewTypoH1" class="text-2xl sm:text-3xl font-bold tracking-tight">
+                <h1 id="previewTypoH1" class="text-2xl sm:text-4xl font-bold tracking-tight">
                   디지털 프로덕트 디자인 가이드라인
                 </h1>
               </div>
 
-              <div class="pt-3 border-t border-current/20">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-[11px] opacity-75 font-mono">Body Regular (15px) — 일반 텍스트 (4.5:1 이상)</span>
+              <div class="pt-4 border-t border-current/20">
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="text-xs opacity-75 font-mono font-medium">Body Regular (17px) — 일반 텍스트 (4.5:1 이상)</span>
                 </div>
-                <p id="previewTypoBody" class="text-sm leading-relaxed">
+                <p id="previewTypoBody" class="text-base leading-relaxed">
                   시각적 계층 구조(Visual Hierarchy)는 사용자가 정보를 신속하게 탐색하도록 돕습니다. 본문 텍스트는 긴 문장에서도 눈의 피로도를 낮추기 위해 충분한 명암비가 필수적입니다.
                 </p>
               </div>
 
-              <div class="pt-3 border-t border-current/20">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-[11px] opacity-75 font-mono">Small Caption (12px Muted) — 보조 텍스트</span>
+              <div class="pt-4 border-t border-current/20">
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="text-xs opacity-75 font-mono font-medium">Small Caption (14px Muted) — 보조 텍스트</span>
                 </div>
-                <p id="previewTypoCaption" class="text-xs opacity-80 font-medium">
+                <p id="previewTypoCaption" class="text-sm opacity-80 font-medium">
                   * 마지막 업데이트: 2026-11-04 · WCAG 2.1 Level AA 규격 검증 완료
                 </p>
               </div>
@@ -459,30 +465,30 @@
           </div>
 
           <!-- 3. Form Input & Action Bar Mockup -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <!-- Card Widget 1: Interactive Form -->
-            <div id="previewFormCard" class="preview-dynamic rounded-2xl p-5 border backdrop-blur-sm transition-all duration-150">
-              <h4 id="previewFormTitle" class="text-sm font-bold mb-1">뉴스레터 구독 신청</h4>
-              <p id="previewFormDesc" class="text-xs opacity-80 mb-4">최신 디자인 토큰 업데이트 소식을 받아보세요.</p>
-              <div class="space-y-2.5">
-                <input type="text" placeholder="이메일 주소를 입력하세요" id="previewInput" class="w-full px-3 py-2 text-xs rounded-lg border outline-none placeholder:opacity-50 transition" readonly value="designer@company.com">
-                <button id="previewBtnSubmit" class="w-full py-2 px-3 rounded-lg text-xs font-semibold shadow transition active:scale-95">
+            <div id="previewFormCard" class="preview-dynamic rounded-2xl p-6 border transition-all duration-150">
+              <h4 id="previewFormTitle" class="text-base font-bold mb-1.5">뉴스레터 구독 신청</h4>
+              <p id="previewFormDesc" class="text-sm opacity-85 mb-5 leading-snug">최신 디자인 토큰 업데이트 소식을 받아보세요.</p>
+              <div class="space-y-3">
+                <input type="text" placeholder="이메일 주소를 입력하세요" id="previewInput" class="w-full px-4 py-3 text-sm rounded-xl border outline-none placeholder:opacity-50 transition shadow-inner" readonly value="designer@company.com">
+                <button id="previewBtnSubmit" class="w-full py-3 px-4 rounded-xl text-sm font-bold shadow-md transition active:scale-95">
                   구독하기
                 </button>
               </div>
             </div>
 
             <!-- Card Widget 2: Metric / Stat Card -->
-            <div id="previewStatCard" class="preview-dynamic rounded-2xl p-5 border backdrop-blur-sm transition-all duration-150 flex flex-col justify-between">
+            <div id="previewStatCard" class="preview-dynamic rounded-2xl p-6 border transition-all duration-150 flex flex-col justify-between">
               <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span id="previewStatLabel" class="text-xs font-semibold opacity-80">전환율 통계 (Conversion)</span>
-                  <span class="text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider" id="previewTrendBadge">+24.8%</span>
+                <div class="flex items-center justify-between mb-3">
+                  <span id="previewStatLabel" class="text-sm font-semibold opacity-85">전환율 통계 (Conversion)</span>
+                  <span class="text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wider" id="previewTrendBadge">+24.8%</span>
                 </div>
-                <div id="previewStatNumber" class="text-3xl font-extrabold tracking-tight mt-1">94.2%</div>
-                <p id="previewStatNote" class="text-xs opacity-80 mt-1">접근성 개선 후 이탈률 18% 감소</p>
+                <div id="previewStatNumber" class="text-4xl font-extrabold tracking-tight mt-1">94.2%</div>
+                <p id="previewStatNote" class="text-sm opacity-85 mt-1.5">접근성 개선 후 이탈률 18% 감소</p>
               </div>
-              <div class="mt-4 pt-3 border-t border-current/20 flex items-center justify-between text-xs">
+              <div class="mt-5 pt-3.5 border-t border-current/20 flex items-center justify-between text-sm">
                 <span class="opacity-80">사용자 만족도 점수</span>
                 <span class="font-bold">4.9 / 5.0</span>
               </div>
@@ -1196,12 +1202,9 @@
       previewCanvasWrapper.style.color = text;
       previewCanvasWrapper.style.borderColor = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.28)`;
 
-      const subtleSurface = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.06)`;
-      const subtleBorder = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.22)`;
-
       // Optical Font Weight Compensation Logic
       const avgBgLuminance = (lumB1 + lumB2) / 2;
-      const isDarkBackground = avgBgLuminance < 0.25;
+      const isDarkBackground = avgBgLuminance < 0.35;
       const applyCompensation = state.opticalWeightCompensation && isDarkBackground;
 
       if (applyCompensation) {
@@ -1210,32 +1213,53 @@
         badgeWeightCompActive.classList.add('hidden');
       }
 
+      // Elevated Surface & Real Card Separation (Eliminating flat text-block appearance)
+      let cardBgStyle, cardBorderStyle, cardShadowStyle;
+      if (isDarkBackground) {
+        cardBgStyle = 'rgba(15, 23, 42, 0.68)';
+        cardBorderStyle = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.25)`;
+        cardShadowStyle = '0 16px 36px -8px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08)';
+      } else {
+        cardBgStyle = 'rgba(255, 255, 255, 0.82)';
+        cardBorderStyle = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.3)`;
+        cardShadowStyle = '0 14px 30px -6px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.05)';
+      }
+
+      const applyCardStyles = (cardEl) => {
+        cardEl.style.backgroundColor = cardBgStyle;
+        cardEl.style.borderColor = cardBorderStyle;
+        cardEl.style.boxShadow = cardShadowStyle;
+        cardEl.style.backdropFilter = 'blur(16px)';
+        cardEl.style.webkitBackdropFilter = 'blur(16px)';
+      };
+
+      applyCardStyles(previewHeroCard);
+      applyCardStyles(previewTypoOuter);
+      applyCardStyles(previewFormCard);
+      applyCardStyles(previewStatCard);
+
       // 1. Hero Card
-      previewHeroCard.style.background = subtleSurface;
       previewHeroCard.style.color = text;
-      previewHeroCard.style.borderColor = subtleBorder;
       previewHeroTitle.style.color = text;
       previewHeroTitle.style.fontWeight = applyCompensation ? '600' : '800';
       previewHeroDesc.style.color = text;
       previewHeroDesc.style.fontWeight = applyCompensation ? '300' : '400';
 
       previewBadge.style.backgroundColor = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.12)`;
-      previewBadge.style.borderColor = subtleBorder;
+      previewBadge.style.borderColor = cardBorderStyle;
       previewBadge.style.color = text;
 
       previewBtnPrimary.style.backgroundColor = text;
       previewBtnPrimary.style.color = (lumT > 0.5) ? bg1 : '#FFFFFF';
       previewBtnPrimary.style.fontWeight = applyCompensation ? '600' : '700';
 
-      previewBtnSecondary.style.borderColor = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.35)`;
+      previewBtnSecondary.style.borderColor = cardBorderStyle;
       previewBtnSecondary.style.color = text;
       previewBtnSecondary.style.backgroundColor = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.08)`;
 
       // 2. Typography Scale Section
-      previewTypoOuter.style.background = subtleSurface;
       previewTypoOuter.style.color = text;
-      previewTypoOuter.style.borderColor = subtleBorder;
-      previewTypoHeader.style.borderColor = subtleBorder;
+      previewTypoHeader.style.borderColor = cardBorderStyle;
       previewTypoH1.style.color = text;
       previewTypoH1.style.fontWeight = applyCompensation ? '600' : '700';
       previewTypoBody.style.color = text;
@@ -1243,23 +1267,19 @@
       previewTypoCaption.style.color = text;
 
       // 3. Form Card
-      previewFormCard.style.background = subtleSurface;
       previewFormCard.style.color = text;
-      previewFormCard.style.borderColor = subtleBorder;
       previewFormTitle.style.color = text;
       previewFormDesc.style.color = text;
 
-      previewInput.style.backgroundColor = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.1)`;
-      previewInput.style.borderColor = `rgba(${rgbT.r}, ${rgbT.g}, ${rgbT.b}, 0.3)`;
+      previewInput.style.backgroundColor = isDarkBackground ? 'rgba(0, 0, 0, 0.3)' : 'rgba(255, 255, 255, 0.7)';
+      previewInput.style.borderColor = cardBorderStyle;
       previewInput.style.color = text;
 
       previewBtnSubmit.style.backgroundColor = text;
       previewBtnSubmit.style.color = (lumT > 0.5) ? bg1 : '#FFFFFF';
 
       // 4. Stat Card
-      previewStatCard.style.background = subtleSurface;
       previewStatCard.style.color = text;
-      previewStatCard.style.borderColor = subtleBorder;
       previewStatLabel.style.color = text;
       previewStatNumber.style.color = text;
       previewStatNumber.style.fontWeight = applyCompensation ? '700' : '800';
